@@ -1,0 +1,9 @@
+{
+  "name": "ob_database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "mysql2": "3.23.4"
+  }
+}

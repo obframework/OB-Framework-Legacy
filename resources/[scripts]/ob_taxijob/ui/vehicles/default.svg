@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#142036"/>
+      <stop offset="100%" stop-color="#0a101c"/>
+    </linearGradient>
+    <linearGradient id="car" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#ffcf2b"/>
+      <stop offset="100%" stop-color="#2f5fb2"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="500" fill="url(#bg)"/>
+  <g opacity=".18" fill="#ffffff">
+    <circle cx="120" cy="80" r="3"/>
+    <circle cx="220" cy="140" r="2"/>
+    <circle cx="760" cy="110" r="3"/>
+    <circle cx="680" cy="240" r="2"/>
+    <circle cx="350" cy="70" r="2"/>
+  </g>
+  <g transform="translate(140,210)">
+    <path d="M70 95h520c20 0 36 12 44 30l15 36H36l10-36c7-18 24-30 44-30z" fill="url(#car)"/>
+    <rect x="145" y="38" width="320" height="70" rx="22" fill="#1f2e4d"/>
+    <rect x="165" y="50" width="130" height="43" rx="10" fill="#34528a"/>
+    <rect x="310" y="50" width="135" height="43" rx="10" fill="#2f4e84"/>
+    <circle cx="145" cy="170" r="42" fill="#0f1522"/>
+    <circle cx="145" cy="170" r="19" fill="#8ea6d7"/>
+    <circle cx="520" cy="170" r="42" fill="#0f1522"/>
+    <circle cx="520" cy="170" r="19" fill="#8ea6d7"/>
+  </g>
+  <text x="450" y="450" text-anchor="middle" font-family="Segoe UI, Arial" font-size="34" fill="#d7dee9">
+    Adicione aqui: ui/vehicles/modelo.png
+  </text>
+</svg>

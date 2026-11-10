@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbis Ônibus</title>
+  <link rel="stylesheet" href="app.css?v=20260812-14" />
+</head>
+<body>
+  <div id="app" class="hidden">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="work-brand"><span>🚌</span><b>Ônibus</b></div>
+        <button class="nav-btn active" data-tab="overview">
+          <span class="nav-icon">&#8962;</span>
+          <span class="nav-label">Visão geral</span>
+        </button>
+        <button class="nav-btn" data-tab="progress">
+          <span class="nav-icon">&#8599;</span>
+          <span class="nav-label">Progresso</span>
+        </button>
+        <button class="nav-btn" data-tab="vehicles">
+          <span class="nav-icon">&#128662;</span>
+          <span class="nav-label">Ônibus</span>
+        </button>
+        <button class="nav-btn" data-tab="leaderboard">
+          <span class="nav-icon">&#127942;</span>
+          <span class="nav-label">Ranking</span>
+        </button>
+        <button class="nav-btn" data-tab="tutorial">
+          <span class="nav-icon">&#9654;</span>
+          <span class="nav-label">Tutorial</span>
+        </button>
+      </aside>
+
+      <main class="panel">
+        <header class="panel-top">
+          <h1 id="pageTitle">Visão geral</h1>
+          <div class="top-actions">
+            <button id="closeBtn" class="btn small">Fechar <b>ESC</b></button>
+          </div>
+        </header>
+
+        <section class="tab active" id="tab-overview">
+          <div class="grid two">
+            <article class="card overview-level">
+              <span class="sub">Nível atual</span>
+              <strong id="level">1</strong>
+              <p id="xpText">0 / 800 XP</p>
+              <div class="overview-bar"><i></i></div>
+            </article>
+            <article class="card overview-status">
+              <span class="sub">Status do turno</span>
+              <p id="shiftState">Fora de turno</p>
+              <p id="rewardProgress">0 rotas para recompensa</p>
+              <div class="actions-inline">
+                <button id="startBtn" class="btn">Liberar Ônibus</button>
+                <button id="stopBtn" class="btn danger">Parar</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="grid three mt12">
+            <article class="card"><span class="sub">Ganhos totais</span><strong id="earned" data-ob-money="0">$0</strong></article>
+            <article class="card"><span class="sub">Rotas concluídas</span><strong id="totalRides">0</strong></article>
+            <article class="card"><span class="sub">Rotas no turno</span><strong id="rides">0</strong></article>
+          </div>
+        </section>
+
+        <section class="tab" id="tab-progress">
+          <article class="card">
+            <div class="row between"><span class="sub">Progresso do nível atual</span><strong id="levelText">Nível: 1</strong></div>
+            <div class="xp-track mt8"><div id="xpFill" class="xp-fill"></div></div>
+            <p class="mt8" id="xpPercent">0%</p>
+          </article>
+
+          <article class="card mt12">
+            <div class="row between">
+              <strong id="previewLevelTitle" class="preview-level-title">Nível: 1</strong>
+              <div class="preview-nav">
+                <button id="previewPrev" class="btn tiny">&larr;</button>
+                <button id="previewNext" class="btn tiny">&rarr;</button>
+              </div>
+            </div>
+
+            <div class="grid two mt12">
+              <article class="card inset">
+                <span class="sub">Bônus de experiência</span>
+                <strong id="xpBonus">0%</strong>
+              </article>
+              <article class="card inset">
+                <span class="sub">Bônus de pagamento</span>
+                <strong id="moneyBonus">0%</strong>
+              </article>
+            </div>
+
+            <article class="card inset mt12">
+              <span class="sub">Novos desbloqueios</span>
+              <div id="unlocksList" class="unlocks-list mt8"></div>
+            </article>
+          </article>
+        </section>
+
+        <section class="tab" id="tab-vehicles">
+          <div class="vehicles-scroll">
+            <div class="grid three" id="vehicleCards"></div>
+          </div>
+        </section>
+
+        <section class="tab" id="tab-leaderboard">
+          <div class="leaderboard-grid">
+            <article class="card leaderboard-main">
+              <div class="leaderboard-header-row">
+                <span class="sub">Ranking</span>
+                <div class="leaderboard-modes">
+                  <button id="lbModeRides" class="btn tiny">Rotas</button>
+                  <button id="lbModeXp" class="btn tiny active-lb-btn">Mais XP</button>
+                </div>
+              </div>
+
+              <div class="leaderboard-table-wrap mt12">
+                <table class="leaderboard-table">
+                  <thead>
+                    <tr>
+                      <th>Posição</th>
+                      <th>Jogador</th>
+                      <th id="lbHeaderValue">Mais experiência</th>
+                    </tr>
+                  </thead>
+                  <tbody id="leaderboardBody"></tbody>
+                </table>
+              </div>
+
+              <div class="leaderboard-pagination mt12">
+                <button id="lbPrevPage" class="btn tiny">&larr;</button>
+                <span id="lbPageInfo">Pagina 1/1</span>
+                <button id="lbNextPage" class="btn tiny">&rarr;</button>
+              </div>
+            </article>
+
+            <article class="card leaderboard-side">
+              <span id="lbSideTitle" class="sub">Mais experiência</span>
+              <p class="lb-placement-label">Sua posição</p>
+              <div class="lb-rank-circle">
+                <span>POSIÇÃO</span>
+                <strong id="lbMyRank">#0</strong>
+              </div>
+              <p id="lbMyValue" class="lb-my-value">0 XP</p>
+            </article>
+          </div>
+        </section>
+        <section class="tab" id="tab-tutorial">
+          <article class="card">
+            <span class="sub">GUIA EM VIDEO</span>
+            <h2 id="tutorialTitle">Tutorial</h2>
+            <p id="tutorialEmpty" class="sub">O tutorial ainda nao foi configurado.</p>
+            <iframe id="tutorialVideo" title="Tutorial do trabalho" style="display:none;width:100%;height:440px;border:0;border-radius:12px;background:#07101f" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="callsPanel" class="taxi-calls hidden">
+    <header class="calls-header">
+      <h2>Rotas de Ônibus</h2>
+      <button id="closeCallsBtn" class="calls-close">Fechar <b>ESC</b></button>
+    </header>
+
+    <div id="cityTabs" class="city-tabs"></div>
+
+    <section id="callsList" class="calls-list"></section>
+  </div>
+
+  <div id="meterHud" class="meter-hud hidden">
+    <div class="meter-title">Linha de Ônibus</div>
+    <div class="meter-row"><span>Valor</span><strong id="meterFare" data-ob-money="0">$0</strong></div>
+    <div class="meter-row"><span>Distância</span><strong id="meterDistance">0.0 km</strong></div>
+    <div class="meter-row"><span>Tempo</span><strong id="meterTime">00:00</strong></div>
+  </div>
+
+  <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+  <script src="app.js?v=20260823-tutorial"></script>
+</body>
+</html>
+
+

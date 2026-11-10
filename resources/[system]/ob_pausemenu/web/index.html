@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OB Framework</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app" class="app hidden" aria-hidden="true">
+    <div class="backdrop"></div>
+    <section class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="assets/logo.png" alt="OB">
+          <div><b>OB Framework</b><small id="city-subtitle">Sua historia acontece aqui</small></div>
+        </div>
+        <div class="top-actions">
+          <span class="online"><i></i><b id="online">--</b> online</span>
+          <span class="clock" id="clock">--:--</span>
+          <button class="icon-button" data-action="close" aria-label="Fechar">×</button>
+        </div>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <nav>
+            <button class="nav active" data-page="home"><span>⌂</span><b>Inicio</b></button>
+            <button class="nav" data-page="map"><span>⌖</span><b>Mapa</b></button>
+            <button class="nav" data-page="character"><span>◉</span><b>Personagem</b></button>
+            <button class="nav" data-page="city"><span>◆</span><b>Cidade</b></button>
+            <button class="nav" data-action="native-settings"><span>⚙</span><b>Configuracoes</b></button>
+          </nav>
+          <div class="sidebar-bottom">
+            <button class="disconnect" data-action="disconnect"><span>↪</span> Desconectar</button>
+            <small>ESC para voltar ao jogo</small>
+          </div>
+        </aside>
+
+        <section class="content">
+          <article class="page active" data-page-content="home">
+            <div class="hero">
+              <div><span class="eyebrow">BEM-VINDO DE VOLTA</span><h1 id="welcome-name">Carregando...</h1><p>Sessao protegida pelo OB Framework.</p></div>
+              <button class="refresh" data-action="refresh">↻ Atualizar</button>
+            </div>
+            <div class="stats">
+              <div class="stat"><small>ID DO PERSONAGEM</small><strong id="user-id">--</strong><span id="server-id">Servidor --</span></div>
+              <div class="stat"><small>EM MAOS</small><strong class="money" id="cash">$0</strong><span>Dinheiro disponivel</span></div>
+              <div class="stat"><small>CONTA BANCARIA</small><strong class="money" id="bank">$0</strong><span>Saldo atual</span></div>
+            </div>
+            <div class="home-grid">
+              <section class="panel quick-panel"><small>ACESSO RAPIDO</small><h2>O que deseja fazer?</h2><button data-page-link="character"><span>◉</span><div><b>Meu personagem</b><small>Identidade e dados pessoais</small></div><em>›</em></button><button data-action="hud-settings"><span>⚙</span><div><b>Personalizar interface</b><small>HUD, graficos e preferencias</small></div><em>›</em></button><button data-page-link="map"><span>⌖</span><div><b>Mapa da cidade</b><small>Marcadores e GPS por clique duplo</small></div><em>›</em></button></section>
+            </div>
+          </article>
+
+          <article class="page map-page" data-page-content="map">
+            <div class="page-title map-title"><div><span class="eyebrow">ATLAS DA CIDADE</span><h1>Mapa interativo</h1><p>Arraste, use a roda do mouse e clique duas vezes para marcar seu GPS.</p></div><div class="map-actions"><button data-map-control="out" aria-label="Diminuir zoom">−</button><button data-map-control="center">Centralizar</button><button data-map-control="in" aria-label="Aumentar zoom">+</button><button class="primary compact" data-action="native-map">Mapa nativo</button></div></div>
+            <div id="atlas-viewport" class="atlas-viewport">
+              <div id="atlas-stage" class="atlas-stage">
+                <img id="atlas-image" src="assets/atlas_calibrado.jpg" alt="Mapa de Los Santos e Blaine County" draggable="false">
+                <div id="atlas-blips" class="atlas-blips"></div>
+                <i id="atlas-player" class="atlas-player"><span>Voce</span></i>
+                <i id="atlas-waypoint" class="atlas-waypoint hidden"><span>Duplo clique para remover</span></i>
+              </div>
+              <div class="atlas-help"><b id="atlas-place">Localizacao atual</b><small>Duplo clique marca · repita sobre o GPS para remover · scroll para zoom</small></div>
+              <div class="atlas-blip-info"><img id="atlas-blip-icon" class="hidden" alt=""><div><b id="atlas-blip-name">Passe o mouse em um blip</b><small id="atlas-blip-count">Carregando pontos do mapa...</small></div></div>
+              <div id="atlas-toast" class="atlas-toast hidden">Rota marcada no GPS</div>
+            </div>
+          </article>
+
+          <article class="page" data-page-content="character">
+            <div class="page-title"><div><span class="eyebrow">IDENTIDADE</span><h1>Meu personagem</h1><p>Dados atuais registrados no OB Framework.</p></div></div>
+            <div class="identity-layout"><section class="identity-card"><div class="avatar" id="avatar">OB</div><h2 id="identity-name">Carregando...</h2><p id="identity-job">Desempregado</p><span id="identity-duty">Fora de servico</span></section><section class="details panel"><div><small>ID</small><b id="detail-id">--</b></div><div><small>NASCIMENTO</small><b id="birthdate">Nao informado</b></div><div><small>NACIONALIDADE</small><b id="nationality">Nao informada</b></div><div><small>SAUDE</small><b id="health">--</b></div><div><small>COLETE</small><b id="armour">--</b></div><div><small>SERVIDOR</small><b id="detail-server">--</b></div></section></div>
+          </article>
+
+          <article class="page" data-page-content="city">
+            <div class="page-title"><div><span class="eyebrow">OB FRAMEWORK</span><h1>Informacoes da cidade</h1><p>Atalhos e orientacoes essenciais para sua sessao.</p></div></div>
+            <div class="city-cards"><section class="panel"><span>01</span><h2>Roleplay em primeiro lugar</h2><p>Valorize a historia, respeite os outros jogadores e mantenha suas acoes coerentes.</p></section><section class="panel"><span>02</span><h2>Precisa de ajuda?</h2><p>Use os canais oficiais de suporte. Evite resolver problemas tecnicos dentro do personagem.</p></section><section class="panel"><span>03</span><h2>Jogue com responsabilidade</h2><p>Conheca as regras da cidade antes de iniciar acoes importantes.</p></section></div>
+          </article>
+
+          <article class="page" data-page-content="settings">
+            <div class="page-title"><div><span class="eyebrow">PREFERENCIAS</span><h1>Configuracoes</h1><p>Ajuste a interface ou acesse configuracoes nativas.</p></div></div>
+            <div class="settings-grid"><button class="setting-card" data-action="hud-settings"><span>◫</span><div><h2>HUD e graficos do OB</h2><p>Escolha o estilo da HUD, filtros e perfil de desempenho.</p></div><em>›</em></button><button class="setting-card" data-action="native-settings"><span>⚙</span><div><h2>Configuracoes do GTA</h2><p>Abra diretamente controles, audio, camera, tela e graficos.</p></div><em>›</em></button><button class="setting-card" data-action="native-map"><span>⌖</span><div><h2>Mapa interativo</h2><p>Veja sua posicao real, todos os blips e marque uma rota.</p></div><em>›</em></button><button class="setting-card" data-action="refresh"><span>↻</span><div><h2>Atualizar dados</h2><p>Sincronize novamente personagem, dinheiro e localizacao.</p></div><em>›</em></button></div>
+          </article>
+        </section>
+      </div>
+    </section>
+    <div id="confirm" class="confirm hidden"><div><span>↪</span><h2>Sair da cidade?</h2><p>Seu personagem sera desconectado do servidor.</p><div><button data-confirm="no">Cancelar</button><button class="danger" data-confirm="yes">Desconectar</button></div></div></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

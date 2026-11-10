@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OB Lavagem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="scrollbars.css">
+    <link rel="stylesheet" href="coordinate-editor.css">
+</head>
+<body>
+    <main id="app" class="hidden">
+        <section id="wash" class="panel hidden">
+            <header><div><small>OB SERVICOS</small><h1 id="washTitle">Lavagem</h1></div><button class="close" data-close>&times;</button></header>
+            <div id="washNotice" class="notice hidden"></div>
+            <div id="washForm">
+                <div class="summary"><span>Dinheiro sujo disponivel</span><strong id="balance">$0</strong></div>
+                <label>Valor para lavar<input id="amount" type="number" min="1" step="1"></label>
+                <div class="calculation"><span>Taxa <b id="rate">40%</b></span><span>Voce recebe <b id="net">$0</b></span></div>
+                <button id="startWash" class="primary">Confirmar valor e reservar maquina</button>
+            </div>
+            <div id="activeWash" class="hidden">
+                <div class="timer"><div id="timerFill"></div></div>
+                <h2 id="timerText">Processando...</h2>
+                <p id="activeDetails"></p>
+                <button id="collectWash" class="primary hidden">Abrir maquina e retirar dinheiro</button>
+            </div>
+        </section>
+
+        <section id="editor" class="panel editor hidden">
+            <header><div><small>OB ADMINISTRACAO</small><h1>Editor de lavagens</h1></div><button class="close" data-close>&times;</button></header>
+            <div class="editorLayout">
+                <aside><button id="newLocation" class="primary">+ Nova lavagem</button><div id="locationList"></div></aside>
+                <form id="editorForm">
+                    <input id="id" type="hidden">
+                    <div class="grid two"><label>Nome<input id="label" maxlength="80"></label><label class="check"><input id="enabled" type="checkbox" checked> Local ativo</label></div>
+                    <h3>Economia</h3>
+                    <div class="grid four"><label>Taxa retida (%)<input id="commission" type="number" min="0" max="95"></label><label>Tempo (segundos)<input id="duration" type="number" min="10" max="3600"></label><label>Minimo<input id="minimum" type="number" min="1"></label><label>Maximo<input id="maximum" type="number" min="1"></label></div>
+                    <label>Grupo autorizado <span class="hint">Deixe vazio para permitir qualquer pessoa. Use a chave do ob_org, como police.</span><input id="accessGroup" maxlength="64" placeholder="Publico"></label>
+                    <h3>Atendente</h3>
+                    <div class="grid two"><label>Modelo<input id="pedModel"></label><label>Cenario<input id="pedScenario"></label></div>
+                    <div class="coordinateEditor">
+                        <div class="grid four coordinateInputs"><label>X<input id="pedX" type="number" step="0.001"></label><label>Y<input id="pedY" type="number" step="0.001"></label><label>Z<input id="pedZ" type="number" step="0.001"></label><label>Rotacao<input id="pedW" type="number" step="0.1"></label></div>
+                        <button type="button" data-capture="ped">Capturar atendente</button>
+                    </div>
+                    <h3>Maquina</h3>
+                    <div class="machineToolbar"><select id="machineSelect"></select><button type="button" id="addMachine" class="primary">+ Adicionar maquina</button><button type="button" id="removeMachine" class="danger">Remover maquina</button></div>
+                    <div class="grid two"><label>Nome da maquina<input id="machineLabel" maxlength="80"></label><label class="check"><input id="machineEnabled" type="checkbox" checked> Maquina ativa</label></div>
+                    <p class="hint">Os modelos fechado, aberto e girando usam a configuracao central do recurso. A captura abaixa a maquina em 1 metro e vira 180 graus.</p>
+                    <div class="coordinateEditor">
+                        <div class="grid four coordinateInputs"><label>X<input id="machineX" type="number" step="0.001"></label><label>Y<input id="machineY" type="number" step="0.001"></label><label>Z<input id="machineZ" type="number" step="0.001"></label><label>Rotacao<input id="machineW" type="number" step="0.1"></label></div>
+                        <div class="coordinateButtons"><button type="button" data-capture="machine">Capturar</button><button type="button" id="placeMachine">Posicionar visualmente</button></div>
+                    </div>
+                    <h3>Posicao da animacao</h3>
+                    <p class="hint">Fique exatamente onde o jogador devera ficar, olhando para a maquina.</p>
+                    <div class="coordinateEditor">
+                        <div class="grid four coordinateInputs"><label>X<input id="actionX" type="number" step="0.001"></label><label>Y<input id="actionY" type="number" step="0.001"></label><label>Z<input id="actionZ" type="number" step="0.001"></label><label>Rotacao<input id="actionW" type="number" step="0.1"></label></div>
+                        <div class="coordinateButtons"><button type="button" data-capture="action">Capturar</button><button type="button" id="generateAction">Gerar pela maquina</button></div>
+                    </div>
+                    <div id="editorMessage" class="notice hidden"></div>
+                    <footer><button type="button" id="teleport">Ir ate o local</button><button type="button" id="deleteLocation" class="danger">Excluir</button><button type="submit" class="primary">Salvar lavagem</button></footer>
+                </form>
+            </div>
+            <section class="auditPanel">
+                <h3>Auditoria financeira</h3>
+                <div class="auditSummary">
+                    <article><span>Operacoes hoje</span><strong id="auditOperations">0</strong></article>
+                    <article><span>Sujo processado</span><strong id="auditDirty">$0</strong></article>
+                    <article><span>Liquido entregue</span><strong id="auditClean">$0</strong></article>
+                    <article class="warning"><span>Em revisao</span><strong id="auditReview">0</strong></article>
+                    <article class="dangerCard"><span>Pagamentos duplicados</span><strong id="auditDuplicates">0</strong></article>
+                </div>
+                <div class="auditFilters">
+                    <input id="auditSearch" placeholder="Comprovante, transacao, ID ou nome">
+                    <select id="auditStatus">
+                        <option value="">Todos os estados</option><option value="processing">Processando</option>
+                        <option value="ready">Pronto</option><option value="paying">Pagando</option>
+                        <option value="completed">Concluido</option><option value="review">Revisao</option>
+                        <option value="refunded">Devolvido</option>
+                    </select>
+                    <select id="auditLocation"><option value="">Todos os locais</option></select>
+                    <button type="button" id="auditSearchButton" class="primary">Buscar</button>
+                </div>
+                <div id="auditMessage" class="notice hidden"></div>
+                <div class="auditTableWrap"><table><thead><tr><th>Comprovante</th><th>Personagem</th><th>Local</th><th>Sujo</th><th>Liquido</th><th>Estado</th><th>Horario</th></tr></thead><tbody id="auditRows"></tbody></table></div>
+                <div id="auditDetails" class="auditDetails hidden"></div>
+            </section>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
+

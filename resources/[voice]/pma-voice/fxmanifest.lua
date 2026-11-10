@@ -1,0 +1,8 @@
+fx_version 'cerulean'
+game 'gta5'
+author 'OB Framework'
+description 'Adaptador de API PMA para ob_voice; NAO e o pma-voice original'
+version '1.0.0'
+dependency 'ob_voice'
+client_script 'client.lua'
+server_script 'server.lua'

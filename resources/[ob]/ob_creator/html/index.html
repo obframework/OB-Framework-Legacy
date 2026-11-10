@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: http: https:; img-src * data: blob: http: https:; style-src * 'unsafe-inline' http: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' http: https:; connect-src * http: https:;" />
+  <title>Orbis Creator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app" class="hidden">
+    <div class="panel">
+        <div class="header">
+          <div class="title" id="title">Orbis Creator</div>
+          <div class="header-actions">
+          <button class="btn" id="btnSave">Comprar</button>
+          <button class="btn ghost" id="btnCancel">Cancelar</button>
+          </div>
+        </div>
+
+      <div class="creator-steps hidden" id="creatorSteps">
+        <button class="step active" data-step="identity">Identidade</button>
+        <button class="step" data-step="parents">Parentesco</button>
+        <button class="step" data-step="face">Rosto</button>
+        <button class="step" data-step="details">Aparencia</button>
+      </div>
+
+      <div class="creator-panels hidden" id="creatorPanels">
+        <div class="creator-panel" id="creatorIdentity">
+          <div class="identity-grid">
+            <label>
+              <span>Primeiro nome</span>
+              <input type="text" id="identityFirst" placeholder="Nome" />
+            </label>
+            <label>
+              <span>Sobrenome</span>
+              <input type="text" id="identityLast" placeholder="Sobrenome" />
+            </label>
+            <label>
+              <span>Nacionalidade</span>
+              <input type="text" id="identityNation" placeholder="Brasileiro" />
+            </label>
+            <label>
+              <span>Genero</span>
+              <select id="identityGender">
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+              </select>
+            </label>
+            <label>
+              <span>Nascimento</span>
+              <input type="date" id="identityBirth" />
+            </label>
+          </div>
+          <div class="identity-actions hidden"></div>
+        </div>
+        <div class="creator-panel" id="creatorParents">
+          <div class="parent-row">
+            <div class="parent-card">
+              <div class="parent-label">Mae</div>
+              <img id="motherPreview" alt="Mae" />
+              <button class="btn ghost" id="btnSelectMother">Selecionar mae</button>
+            </div>
+            <div class="parent-card">
+              <div class="parent-label">Pai</div>
+              <img id="fatherPreview" alt="Pai" />
+              <button class="btn ghost" id="btnSelectFather">Selecionar pai</button>
+            </div>
+          </div>
+          <div class="blend-row">
+            <div class="blend-label">Semelhanca</div>
+            <input type="range" id="blendRange" min="0" max="100" value="50" />
+            <div class="blend-value" id="blendValue">50%</div>
+          </div>
+        </div>
+
+        <div class="creator-panel hidden" id="creatorFace">
+          <div class="face-list" id="faceList"></div>
+        </div>
+      </div>
+
+      <div class="content" id="mainContent">
+        <div class="sidebar" id="sections"></div>
+        <div class="main">
+          <div class="category-bar hidden" id="categoryBar">
+            <button class="btn ghost" id="btnBack">Voltar</button>
+            <div class="category-title" id="categoryTitle"></div>
+          </div>
+          <div class="adjust hidden" id="adjustBar">
+            <div class="adjust-block hidden" id="textureBlock">
+              <span class="adjust-label">Textura</span>
+              <button class="btn ghost" id="btnTexPrev">&lt;</button>
+              <span class="adjust-value" id="textureValue">0/0</span>
+              <button class="btn ghost" id="btnTexNext">&gt;</button>
+            </div>
+            <div class="adjust-block hidden" id="colorBlock">
+              <span class="adjust-label">Cor</span>
+              <button class="btn ghost" id="btnColorPrev">&lt;</button>
+              <span class="adjust-value" id="colorValue">0/0</span>
+              <button class="btn ghost" id="btnColorNext">&gt;</button>
+            </div>
+          </div>
+          <div class="categories" id="categories"></div>
+          <div class="grid" id="items"></div>
+          <div class="pager" id="pager">
+            <button class="btn ghost" id="btnPrev">Anterior</button>
+            <div class="page-info" id="pageInfo">Pagina 1</div>
+            <button class="btn ghost" id="btnNext">Proxima</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer" id="mainFooter">
+        <div class="hint">A/D gira o personagem | Scroll zoom</div>
+        <div class="total" id="totalPrice" data-ob-money="0" data-ob-prefix="Total: ">Total: $0</div>
+        <div class="actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="parentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="parentModalTitle">Selecionar</div>
+        <button class="btn ghost" id="parentModalClose">Fechar</button>
+      </div>
+      <div class="modal-grid" id="parentGrid"></div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="confirmModal">
+    <div class="modal-content small">
+      <div class="modal-header">
+        <div class="modal-title" id="confirmTitle">Confirmar cadastro</div>
+      </div>
+      <div class="modal-body" id="confirmBody"></div>
+      <div class="modal-actions">
+        <button class="btn ghost" id="confirmNo">Nao</button>
+        <button class="btn" id="confirmYes">Sim</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="alertModal">
+    <div class="modal-content small">
+      <div class="modal-header">
+        <div class="modal-title" id="alertTitle">Aviso</div>
+      </div>
+      <div class="modal-body" id="alertBody"></div>
+      <div class="modal-actions">
+        <button class="btn" id="alertOk">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

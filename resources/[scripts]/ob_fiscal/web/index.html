@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OB Fiscal</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<main id="app" class="hidden">
+  <section class="panel">
+    <header><div><small>OB CONTABILIDADE</small><h1 id="title">Gestao fiscal</h1></div><button id="close" class="close">&times;</button></header>
+    <div id="notice" class="notice hidden"></div>
+    <section id="owner" class="hidden">
+      <div class="toolbar"><label>Empresa<select id="shopSelect"></select></label><div class="pill">Risco fiscal <b id="risk">0</b>/100</div></div>
+      <div class="cards">
+        <article><span>Caixa empresarial</span><strong id="businessBalance">$0</strong></article>
+        <article><span>Caixa nao declarado</span><strong id="unreported">$0</strong></article>
+        <article><span>Vendas reais em 7 dias</span><strong id="sales7d">$0</strong></article>
+        <article><span>Capacidade restante</span><strong id="remaining">$0</strong></article>
+      </div>
+      <div class="ownerGrid">
+        <article class="actionCard"><h2>Registrar dinheiro no caixa</h2><p>O valor sujo sai do inventario e permanece bloqueado ate ser declarado.</p><label>Valor<input id="depositAmount" type="number" min="1"></label><button id="deposit" class="primary">Depositar no caixa nao declarado</button></article>
+        <article class="actionCard"><h2>Emitir declaracao</h2><p>Imposto fiscal de <b id="taxRate">20%</b>. O restante entra no caixa limpo da empresa.</p><label>Valor bruto<input id="declareAmount" type="number" min="1"></label><div class="calculation">Liquido estimado <b id="net">$0</b></div><button id="declare" class="primary">Declarar faturamento</button></article>
+        <article class="actionCard"><h2>Retirar pro-labore</h2><p>Transfere saldo da empresa para a conta bancaria do proprietario.</p><label>Valor<input id="payrollAmount" type="number" min="1"></label><button id="payroll">Transferir para o banco</button></article>
+      </div>
+      <h2>Declaracoes recentes</h2><div id="declarations" class="history"></div>
+      <h2>Pro-labores recentes</h2><div id="payrollHistory" class="history"></div>
+    </section>
+    <section id="police" class="hidden">
+      <div class="policeHead"><div><h2>Inteligencia financeira</h2><p>Declaracoes empresariais, divergencias e indicadores automaticos de risco.</p></div><button id="refreshPolice">Atualizar</button></div>
+      <div id="cases" class="cases"></div>
+    </section>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OB Framework - Morte</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="death" class="hidden">
+    <section class="death-content" aria-live="polite">
+      <div class="heartbeat" aria-hidden="true"><i></i></div>
+      <p class="eyebrow">VOC&Ecirc;</p>
+      <h1>MORREU</h1>
+      <p class="cause-label">CAUSA DA MORTE</p>
+      <p id="death-cause" class="cause">Ferimentos graves</p>
+      <p id="death-detail" class="detail">Aguarde atendimento ou uma adrenalina no HP ilegal.</p>
+      <strong id="timer">02:00</strong>
+      <button id="give-up" type="button" disabled>PRESSIONE E PARA RENASCER</button>
+      <button id="npc-rescue" class="npc-rescue" type="button">CHAMAR SOCORRO AUTOMATICO</button>
+    </section>
+  </main>
+  <main id="medical" class="hidden">
+    <section class="medical-panel" aria-label="Atendimento EMS">
+      <header>
+        <div><p>OB HOSPITAL</p><h2 id="medical-name">Paciente</h2></div>
+        <button id="medical-close" class="medical-close" type="button" aria-label="Fechar">&times;</button>
+      </header>
+      <div class="patient-state">
+        <span id="medical-status">Avaliacao pendente</span>
+        <strong id="medical-health">--</strong>
+      </div>
+      <div class="medical-actions">
+        <button data-medical-action="examine" type="button"><b>Examinar</b><small>Verificar sinais e ferimentos</small></button>
+        <button data-medical-action="treat" type="button"><b>Tratar</b><small id="treatment-description">Aplicar cuidados e recuperar a saude</small></button>
+        <button data-medical-action="revive" type="button"><b>Reanimar</b><small id="revive-description">Utilizar desfibrilador e protocolo CPR</small></button>
+        <button data-medical-action="carry" type="button"><b id="carry-label">Carregar</b><small>Transportar o paciente no ombro</small></button>
+        <button data-medical-action="stretcher" type="button"><b>Maca</b><small>Colocar ou retirar o paciente da maca proxima</small></button>
+      </div>
+      <p class="medical-hint">ESC fecha o atendimento</p>
+    </section>
+  </main>
+  <main id="body-scan" class="hidden">
+    <section class="scan-panel" aria-label="Diagnostico corporal">
+      <header class="scan-header">
+        <div><p>OB HOSPITAL · DIAGNOSTICO</p><h2 id="scan-name">Paciente</h2></div>
+        <div class="scan-vitals"><span id="scan-status">CONSCIENTE</span><strong id="scan-health">100%</strong></div>
+        <button id="scan-close" class="medical-close" type="button" aria-label="Fechar">&times;</button>
+      </header>
+      <div class="scan-content">
+        <div class="body-map" aria-label="Mapa corporal do paciente">
+          <div class="scan-grid" aria-hidden="true"></div>
+          <svg viewBox="0 0 260 520" role="img" aria-label="Corpo humano">
+            <g data-region="head"><circle cx="130" cy="55" r="39"/></g>
+            <g data-region="torso"><path d="M93 103 Q130 88 167 103 L183 270 Q160 295 130 297 Q100 295 77 270 Z"/></g>
+            <g data-region="left_arm"><path d="M84 108 Q63 111 53 139 L28 272 Q24 290 39 295 Q55 299 62 279 L92 155 Z"/></g>
+            <g data-region="right_arm"><path d="M176 108 Q197 111 207 139 L232 272 Q236 290 221 295 Q205 299 198 279 L168 155 Z"/></g>
+            <g data-region="left_hand"><path d="M29 282 Q12 303 23 329 Q37 341 52 323 L57 292 Z"/></g>
+            <g data-region="right_hand"><path d="M231 282 Q248 303 237 329 Q223 341 208 323 L203 292 Z"/></g>
+            <g data-region="left_leg"><path d="M82 278 L125 290 L116 475 Q109 507 82 500 Q72 492 78 466 Z"/></g>
+            <g data-region="right_leg"><path d="M178 278 L135 290 L144 475 Q151 507 178 500 Q188 492 182 466 Z"/></g>
+          </svg>
+          <div class="scan-legend"><i></i> Regiao lesionada</div>
+        </div>
+        <section class="injury-report">
+          <div class="report-title"><div><p>RELATORIO CLINICO</p><h3>Lesoes detectadas</h3></div><span id="injury-count">0</span></div>
+          <div id="injury-list" class="injury-list"></div>
+          <p class="scan-note">Examinar nao gasta itens. Tratar consome 1 material do inventario do medico ao concluir. Apos pegar materiais, reabra o exame para atualizar o estoque.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

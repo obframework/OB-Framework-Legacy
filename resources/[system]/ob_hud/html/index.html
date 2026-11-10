@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OB Framework HUD</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <main id="main" class="hidden">
+    <img id="logo" class="logo" src="assets/logo.png" alt="OB Framework" />
+    <div id="minimap-frame" class="minimap-frame hidden" aria-hidden="true"></div>
+
+    <section id="info-stack">
+      <div class="info-box"><span class="symbol">◷</span><span id="clock">00:00</span></div>
+      <div id="voice-box" class="voice-box hidden" title="HOME: distancia da voz; SHIFT+HOME: diminuir">
+        <img src="assets/icons/mic.svg" alt="Microfone" />
+        <div class="voice-level" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <div id="ammo-box" class="info-box hidden"><span class="symbol">⌁</span><span id="ammo">0</span></div>
+    </section>
+
+    <section id="status-stack">
+      <div class="status-box" data-key="health"><img src="assets/icons/health.svg" alt="Vida" /><span>100</span></div>
+      <div class="status-box hidden" data-key="armor"><img src="assets/icons/armor.svg" alt="Colete" /><span>0</span></div>
+      <div class="status-box" data-key="hunger"><img src="assets/icons/hunger.svg" alt="Fome" /><span>100</span></div>
+      <div class="status-box" data-key="thirst"><img src="assets/icons/thirst.svg" alt="Sede" /><span>100</span></div>
+      <div class="status-box hidden" data-key="stamina"><img src="assets/icons/stamina.svg" alt="Folego" /><span>100</span></div>
+    </section>
+
+    <section id="vehicle" class="hidden">
+      <div id="gear" class="gear road-only">R</div>
+      <div class="speedometer road-only">
+        <div id="rpm-bars" class="rpm-bars"></div>
+        <strong id="speed">000</strong>
+        <span id="unit">KM/H</span>
+        <span id="mileage">0 km</span>
+      </div>
+      <div id="seatbelt" class="seatbelt off" title="Cinto: G"><span class="belt-mark">╲</span><b>G</b></div>
+      <div class="gauge fuel"><span>F</span><div id="fuel-fill" class="fill"></div><b id="fuel">100%</b></div>
+      <div class="condition-stack" aria-label="Estado do veiculo">
+        <div class="condition-gauge body" title="Lataria">
+          <span>L</span><b id="body-health">100%</b><div id="body-fill" class="fill"></div>
+        </div>
+        <div class="condition-gauge engine" title="Motor">
+          <span>M</span><b id="engine">100%</b><div id="engine-fill" class="fill"></div>
+        </div>
+      </div>
+
+      <div id="flight-panel" class="flight-panel" aria-label="Instrumentos de voo">
+        <div class="flight-header"><strong id="flight-kind">PLANE</strong><span>FLIGHT DATA</span></div>
+        <div class="flight-dials">
+          <div class="flight-dial airspeed-dial">
+            <span class="dial-title">GS</span>
+            <i id="airspeed-needle" class="dial-needle"></i>
+            <strong id="flight-speed">000</strong><small>KT</small>
+          </div>
+          <div class="flight-dial attitude-dial">
+            <div id="attitude-horizon" class="attitude-horizon"><span class="sky"></span><span class="ground"></span><i></i></div>
+            <span class="aircraft-symbol">&mdash;&#9670;&mdash;</span>
+            <strong id="flight-attitude">P 0 / R 0</strong>
+          </div>
+          <div class="flight-dial altitude-dial">
+            <span class="dial-title">ALT</span>
+            <i id="altitude-needle" class="dial-needle"></i>
+            <strong id="flight-altitude">00000</strong><small>FT</small>
+          </div>
+        </div>
+        <div class="flight-readouts">
+          <span><small>HDG</small><b id="flight-heading">000&deg;</b></span>
+          <span><small>AGL</small><b id="flight-agl">0 FT</b></span>
+          <span><small>V/S</small><b id="flight-vspeed">0 FPM</b></span>
+          <span><small>RPM</small><b id="flight-rpm">0%</b></span>
+          <span class="flight-fuel-readout"><small>FUEL</small><b id="flight-fuel">0%</b></span>
+          <span><small>ENG</small><b id="flight-engine">0%</b></span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section id="settings-overlay" class="settings-overlay hidden">
+    <div class="settings-panel">
+      <header class="settings-header">
+        <div>
+          <small>OB FRAMEWORK</small>
+          <h1>Personalizar interface</h1>
+          <p>Escolha a HUD e ajuste os graficos para o seu computador.</p>
+        </div>
+        <button id="settings-close" class="settings-close" type="button" aria-label="Fechar">&times;</button>
+      </header>
+
+      <nav class="settings-tabs" aria-label="Categorias">
+        <button class="settings-tab active" type="button" data-tab="hud">HUD</button>
+        <button class="settings-tab" type="button" data-tab="graphics">Graficos e FPS</button>
+      </nav>
+
+      <div class="settings-content">
+        <section class="settings-page active" data-page="hud">
+          <div class="section-heading">
+            <div><small>ESTILO</small><h2>Escolha sua HUD</h2></div>
+            <p>A alteracao e exibida e salva imediatamente.</p>
+          </div>
+          <div class="choice-grid theme-grid">
+            <button class="choice-card theme-card" type="button" data-setting="theme" data-value="current">
+              <span class="theme-preview preview-current"><i></i><i></i><i></i><b>128</b><span></span></span>
+              <strong>Classica</strong><small>Layout completo e tradicional da cidade.</small>
+            </button>
+            <button class="choice-card theme-card" type="button" data-setting="theme" data-value="clean">
+              <span class="theme-preview preview-clean"><i></i><i></i><i></i><b>72</b><span></span></span>
+              <strong>Clean</strong><small>Inspirada em HUDs modernas, leve e discreta.</small>
+            </button>
+            <button class="choice-card theme-card" type="button" data-setting="theme" data-value="racing">
+              <span class="theme-preview preview-racing"><i></i><i></i><i></i><b>214</b><span></span></span>
+              <strong>Racing</strong><small>Telemetria central e acabamento de corrida.</small>
+            </button>
+          </div>
+          <div class="map-note"><span>MAPA</span> Clean usa o canto superior direito; Racing usa o canto superior esquerdo.</div>
+        </section>
+
+        <section class="settings-page" data-page="graphics">
+          <div class="section-heading">
+            <div><small>VISUAL</small><h2>Filtro de imagem</h2></div>
+            <p>O filtro e apenas local e nao altera o clima da cidade.</p>
+          </div>
+          <div class="choice-grid compact-grid filter-grid">
+            <button class="choice-card" type="button" data-setting="visualFilter" data-value="default"><span class="swatch default"></span><strong>Original</strong><small>Imagem padrao do jogo.</small></button>
+            <button class="choice-card" type="button" data-setting="visualFilter" data-value="realistic"><span class="swatch realistic"></span><strong>Realista</strong><small>Cores naturais com reflexos e luz ambiente destacados.</small></button>
+            <button class="choice-card" type="button" data-setting="visualFilter" data-value="natural"><span class="swatch natural"></span><strong>Natural</strong><small>Cores naturais mais vivas, sem saturacao exagerada.</small></button>
+            <button class="choice-card" type="button" data-setting="visualFilter" data-value="cinema"><span class="swatch cinema"></span><strong>Cinema</strong><small>Tons suaves sem escurecer demais.</small></button>
+            <button class="choice-card" type="button" data-setting="visualFilter" data-value="vibrant"><span class="swatch vibrant"></span><strong>Vibrante</strong><small>Mais cor e contraste.</small></button>
+            <button class="choice-card" type="button" data-setting="visualFilter" data-value="contrast"><span class="swatch contrast"></span><strong>Contraste</strong><small>Imagem mais marcada.</small></button>
+          </div>
+
+          <div class="section-heading performance-heading">
+            <div><small>DESEMPENHO</small><h2>Perfil de FPS</h2></div>
+            <p>Perfis fortes reduzem sombras, luzes distantes e nivel de detalhe.</p>
+          </div>
+          <div class="choice-grid compact-grid">
+            <button class="choice-card" type="button" data-setting="performancePreset" data-value="default"><span class="perf-icon">HQ</span><strong>Original</strong><small>Sem reducao grafica.</small></button>
+            <button class="choice-card" type="button" data-setting="performancePreset" data-value="balanced"><span class="perf-icon">B</span><strong>Equilibrado</strong><small>Ganho leve, boa qualidade.</small></button>
+            <button class="choice-card" type="button" data-setting="performancePreset" data-value="performance"><span class="perf-icon">P</span><strong>Desempenho</strong><small>Menos sombras e distancia.</small></button>
+            <button class="choice-card" type="button" data-setting="performancePreset" data-value="ultra"><span class="perf-icon">MAX</span><strong>FPS maximo</strong><small>Maior reducao visual.</small></button>
+          </div>
+        </section>
+      </div>
+
+      <footer class="settings-footer">
+        <span id="settings-status">Configuracoes salvas neste computador.</span>
+        <button id="settings-reset" type="button">Restaurar padrao</button>
+      </footer>
+    </div>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>

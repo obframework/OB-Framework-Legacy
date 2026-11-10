@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OB Framework</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main id="selector" class="hidden">
+      <section class="panel" aria-label="Selecao de personagem">
+        <p class="eyebrow">OB Framework</p>
+        <h1>Seus personagens</h1>
+        <p class="subtitle">Escolha quem vai entrar na cidade.</p>
+        <div id="characters" class="characters"></div>
+      </section>
+    </main>
+    <section id="progress" class="progress hidden" aria-live="polite">
+      <div class="progress-card">
+        <strong id="progress-label">Processando...</strong>
+        <div class="progress-track"><i id="progress-fill"></i></div>
+      </div>
+    </section>
+    <script src="app.js"></script>
+  </body>
+</html>

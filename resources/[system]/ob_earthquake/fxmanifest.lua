@@ -1,0 +1,10 @@
+fx_version 'cerulean'
+game 'gta5'
+author 'OB Framework'
+description 'Alerta, tempestade, oscilacao de energia e tremor antes do reinicio'
+version '1.1.0'
+shared_script 'config.lua'
+ui_page 'html/index.html'
+files { 'html/index.html', 'sounds/*.ogg', 'sounds/*.mp3', 'sounds/*.wav' }
+client_script 'client.lua'
+server_script 'server.lua'

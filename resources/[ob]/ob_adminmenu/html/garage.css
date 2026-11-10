@@ -1,0 +1,65 @@
+#garage-page {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.window > footer,
+#garage-page .vehicle-heading,
+#garage-page .page-actions,
+#garage-page .owner-card,
+#garage-page .give-card,
+#garage-page .feedback {
+  flex: 0 0 auto;
+}
+
+.window > footer {
+  position: relative;
+  z-index: 2;
+}
+
+#garage-page .vehicle-list {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+  padding-right: 8px;
+  padding-bottom: 18px;
+  scroll-padding-bottom: 18px;
+}
+
+#garage-page .vehicle-card {
+  grid-template-columns: 1.3fr .7fr .8fr .9fr 1.25fr auto;
+}
+
+#garage-page .vehicle-card:last-child {
+  margin-bottom: 10px;
+}
+
+.vehicle-remove {
+  align-self: center;
+  padding: 10px 13px;
+  background: #842d3c;
+  border-color: #c64c61;
+}
+
+.vehicle-remove:hover:not(:disabled) {
+  background: #a7374b;
+}
+
+.vehicle-remove.confirming {
+  background: #b53a50;
+  border-color: #ff7089;
+}
+
+.vehicle-remove:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+@media (max-width: 760px) {
+  #garage-page .vehicle-card {
+    grid-template-columns: 1fr 1fr;
+  }
+}

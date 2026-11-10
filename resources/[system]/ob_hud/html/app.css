@@ -1,0 +1,363 @@
+:root {
+  --text: #f6f7fb;
+  --ob-night: #020711;
+  --ob-navy: #061b40;
+  --ob-blue: #0879ed;
+  --ob-electric: #19c8ff;
+  --glass: rgba(4, 16, 38, .76);
+  --glass-strong: rgba(2, 7, 18, .94);
+  --stroke: rgba(38, 173, 255, .42);
+}
+
+* { box-sizing: border-box; user-select: none; }
+body { margin: 0; overflow: hidden; font-family: Arial, Helvetica, sans-serif; }
+.hidden { display: none !important; }
+
+#main { position: fixed; inset: 0; pointer-events: none; }
+.minimap-frame {
+  position: absolute; z-index: 2; width: 15.25vw; height: 19.5vh; pointer-events: none;
+  border: .18vh solid rgba(41,185,255,.72); border-radius: .2vh;
+  box-shadow: 0 0 1.2vh rgba(0,0,0,.72), inset 0 0 1.1vh rgba(17,139,214,.16);
+}
+.minimap-frame::before, .minimap-frame::after {
+  content: none;
+}
+.minimap-frame::before { left: -.3vh; top: -.3vh; border-left: .32vh solid; border-top: .32vh solid; }
+.minimap-frame::after { right: -.3vh; bottom: -.3vh; border-right: .32vh solid; border-bottom: .32vh solid; }
+#main.theme-current .minimap-frame { left: 1vw; bottom: 2.0vh; }
+.logo {
+  position: absolute; top: 1.2vh; left: 50%; transform: translateX(-50%);
+  width: 8vh; height: 7vh; object-fit: contain; opacity: .96;
+  filter: drop-shadow(0 0 .65vh rgba(0, 0, 0, .78)) drop-shadow(0 0 .4vh rgba(8, 121, 237, .28));
+}
+
+#info-stack { position: absolute; top: 3.2vh; right: 1.7vh; display: flex; gap: .7vh; }
+.info-box {
+  min-width: 9.4vh; height: 3.4vh; padding: .5vh .85vh; border-radius: .9vh;
+  border: .12vh solid var(--stroke); background: linear-gradient(90deg, rgba(5, 33, 79, .88), rgba(7, 102, 190, .76));
+  color: var(--text); display: flex; align-items: center; justify-content: center; gap: .7vh;
+  font-size: 1.15vh; font-weight: 700;
+}
+.symbol { font-size: 1.7vh; opacity: .9; }
+
+#status-stack { position: absolute; right: 2.2vh; bottom: 1.4vh; display: flex; gap: .7vh; }
+.status-box {
+  --pct: 0; --grad-a: #188fff; --grad-b: #075bc8;
+  position: relative; width: 5.2vh; height: 5.2vh; overflow: hidden; border-radius: .75vh;
+  border: .12vh solid var(--stroke); background: linear-gradient(180deg, var(--glass), var(--glass-strong));
+  color: var(--text); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .2vh;
+}
+.status-box::after {
+  content: ''; position: absolute; inset: auto 0 0; height: calc(var(--pct) * 1%);
+  background: linear-gradient(180deg, var(--grad-a), var(--grad-b)); opacity: .82; z-index: 0;
+}
+.status-box img, .status-box span { z-index: 1; }
+.status-box img { width: 1.65vh; height: 1.65vh; filter: drop-shadow(0 0 .45vh rgba(0,0,0,.55)); }
+.status-box span { font-size: 1.1vh; font-weight: 700; }
+.voice-box {
+  width: 5.8vh; height: 3.4vh; border-radius: .9vh; border: .12vh solid var(--stroke);
+  background: var(--glass-strong); color: #92b7d6; display: flex;
+  align-items: center; justify-content: center; gap: .65vh; transition: background .12s, box-shadow .12s;
+}
+.voice-box img { width: 1.65vh; height: 1.65vh; }
+.voice-level { display: flex; align-items: flex-end; gap: .22vh; height: 1.65vh; }
+.voice-level i { width: .32vh; height: .6vh; border-radius: .1vh; background: #92b7d633; }
+.voice-level i:nth-child(2) { height: 1.1vh; }
+.voice-level i:nth-child(3) { height: 1.65vh; }
+.voice-level i.on { background: var(--ob-electric); }
+.voice-box.talking img, .voice-box.radio-talking img { filter: drop-shadow(0 0 .4vh #19c8ff); }
+.voice-box.talking { color: #fff; border-color: #4adcff; background: #07568d; box-shadow: 0 0 1.1vh #19c8ff66; }
+.voice-box.talking .voice-level i.on { background: #fff; box-shadow: 0 0 .5vh #19c8ff; }
+.voice-box.talking img { filter: brightness(1.8) drop-shadow(0 0 .65vh #19c8ff); }
+.voice-box.radio-talking { color: #fff; border-color: #92eaff; background: #096eae; }
+.voice-box.offline { opacity: .5; }
+
+#vehicle { position: absolute; right: 2.2vh; bottom: 10.4vh; display: flex; align-items: flex-end; gap: .8vh; color: var(--text); }
+.gear {
+  width: 5vh; height: 5vh; display: grid; place-items: center; margin-right: -1.5vh; z-index: 1;
+  border: .2vh solid #149ee9; border-radius: 50%; background: rgba(2, 11, 25, .58);
+  color: #62d6ff; font: 700 2.1vh 'Courier New', monospace;
+}
+.speedometer {
+  width: 17vh; height: 17vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: .28vh solid rgba(54, 187, 255, .35); border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, rgba(8, 29, 63, .97), rgba(2, 6, 15, .99)); box-shadow: 0 0 2vh rgba(0,0,0,.65), inset 0 0 1.4vh rgba(9, 107, 220, .16);
+}
+.rpm-bars { width: 65%; height: 1.25vh; margin-bottom: .8vh; display: grid; grid-template-columns: repeat(12, 1fr); gap: .18vh; }
+.rpm-bar { display: block; border-radius: .12vh; background: rgba(255,255,255,.18); }
+.rpm-bar.on { background: #22b9ff; }
+.rpm-bar.danger { background: #ffb34d; }
+#speed { font-size: 6vh; line-height: 1; }
+#unit { margin-top: .4vh; font-size: 1.3vh; font-weight: 700; }
+.seatbelt {
+  width: 4.5vh; height: 5.2vh; margin-right: -.2vh; border-radius: .8vh;
+  border: .12vh solid rgba(255,255,255,.2); background: rgba(2, 9, 22, .9);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #ff5366; font-size: 1.25vh; font-weight: 800; line-height: 1;
+}
+.seatbelt .belt-mark { font-size: 3.1vh; font-weight: 900; transform: rotate(-10deg); line-height: .7; }
+.seatbelt.on { color: #44e8b1; border-color: rgba(68,232,177,.7); box-shadow: 0 0 1vh rgba(68,232,177,.26); }
+.seatbelt.off { color: #ff5366; border-color: rgba(255,83,102,.68); }
+.gauge {
+  position: relative; width: 5.5vh; height: 14vh; padding-bottom: .6vh; overflow: hidden;
+  border: .12vh solid var(--stroke); border-radius: .8vh; background: linear-gradient(180deg, var(--glass), var(--glass-strong));
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+}
+.gauge > span { position: absolute; top: .6vh; font: 700 1.3vh Arial; z-index: 1; }
+.gauge b { position: relative; z-index: 1; font-size: 1.05vh; }
+.fill { position: absolute; inset: auto 0 0; background: linear-gradient(180deg, #2cf8b8, #16a085); }
+.condition-stack { width: 6.8vh; height: 14vh; display: flex; flex-direction: column; gap: .55vh; }
+.condition-gauge {
+  position: relative; flex: 1; min-height: 0; overflow: hidden; padding: .55vh .55vh 1.15vh;
+  border: .12vh solid var(--stroke); border-radius: .75vh; background: linear-gradient(180deg, var(--glass), var(--glass-strong));
+  display: flex; align-items: flex-start; justify-content: space-between; color: var(--text);
+}
+.condition-gauge > span, .condition-gauge > b { position: relative; z-index: 1; font: 700 1.05vh Arial; }
+.condition-gauge > span { color: #8edfff; }
+.condition-gauge .fill { width: 100%; height: 100%; transition: height .16s ease; opacity: .82; }
+.condition-gauge.body .fill { background: linear-gradient(180deg, #ffbd58, #ff7d3d); }
+.condition-gauge.engine .fill { background: linear-gradient(180deg, #ff6b65, #b51d35); }
+
+/* Instrumentos de voo: substituem somente o painel automotivo. */
+.flight-panel {
+  --flight-accent: #4ed8ff; --flight-warn: #ffbd58; --flight-dial: 10.2vh;
+  display: none; width: 39vh; padding: .75vh; overflow: hidden;
+  border: .15vh solid rgba(78,216,255,.48); border-radius: 1.2vh;
+  background: linear-gradient(145deg, rgba(4,17,31,.94), rgba(1,5,12,.98));
+  box-shadow: 0 0 1.8vh rgba(0,0,0,.7), inset 0 0 1.2vh rgba(34,165,224,.1);
+}
+#vehicle.aircraft > :not(.flight-panel) { display: none !important; }
+#vehicle.aircraft .flight-panel { display: block; }
+.flight-header { height: 2.2vh; display: flex; align-items: center; justify-content: space-between; padding: 0 .45vh; }
+.flight-header strong { color: var(--flight-accent); font: 900 1.05vh 'Courier New', monospace; letter-spacing: .16em; }
+.flight-header span { color: #7899aa; font: 700 .75vh Arial; letter-spacing: .2em; }
+.flight-dials { display: grid; grid-template-columns: repeat(3, var(--flight-dial)); justify-content: center; gap: 1.25vh; }
+.flight-dial {
+  position: relative; width: var(--flight-dial); height: var(--flight-dial); overflow: hidden; border-radius: 50%;
+  border: .18vh solid rgba(181,229,246,.6);
+  background: radial-gradient(circle, rgba(8,25,39,.98) 0 57%, rgba(1,5,10,.99) 59% 100%);
+  box-shadow: inset 0 0 0 .35vh rgba(255,255,255,.04), inset 0 0 1.3vh #000, 0 .35vh .9vh rgba(0,0,0,.5);
+}
+.flight-dial::before {
+  content: ''; position: absolute; inset: .4vh; border-radius: 50%; opacity: .7;
+  background: repeating-conic-gradient(from -1deg, rgba(226,244,250,.85) 0deg 1deg, transparent 1deg 15deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 72%, #000 73% 100%);
+  mask: radial-gradient(circle, transparent 0 72%, #000 73% 100%);
+}
+.flight-dial .dial-title { position: absolute; z-index: 2; top: 1.35vh; left: 50%; transform: translateX(-50%); color: #9eb6c2; font: 800 .75vh Arial; letter-spacing: .12em; }
+.flight-dial > strong { position: absolute; z-index: 3; left: 50%; bottom: 2.15vh; transform: translateX(-50%); color: #fff; font: 900 1.55vh 'Courier New', monospace; text-shadow: 0 .15vh .35vh #000; }
+.flight-dial > small { position: absolute; z-index: 3; left: 50%; bottom: 1.15vh; transform: translateX(-50%); color: var(--flight-accent); font: 800 .68vh Arial; }
+.dial-needle { position: absolute; z-index: 2; left: 50%; bottom: 50%; width: .2vh; height: 3.55vh; transform-origin: 50% 100%; border-radius: .2vh; background: linear-gradient(#ff5b60, #fff 65%); box-shadow: 0 0 .4vh rgba(255,80,85,.75); transition: transform .12s linear; }
+.dial-needle::after { content: ''; position: absolute; left: 50%; bottom: -.38vh; width: .75vh; height: .75vh; transform: translateX(-50%); border-radius: 50%; background: #dbeaf0; border: .18vh solid #17242c; }
+.attitude-dial::before { display: none; }
+.attitude-horizon { --pitch: 0vh; --roll: 0deg; position: absolute; inset: .65vh; overflow: hidden; border-radius: 50%; transform: rotate(var(--roll)); transition: transform .12s linear; background: #669cc5; }
+.attitude-horizon .sky, .attitude-horizon .ground { position: absolute; left: -20%; right: -20%; height: 70%; transform: translateY(var(--pitch)); transition: transform .12s linear; }
+.attitude-horizon .sky { top: -20%; background: linear-gradient(#286b9e, #73b7dc); }
+.attitude-horizon .ground { bottom: -20%; background: linear-gradient(#8f633b, #392a20); border-top: .22vh solid #fff; }
+.attitude-horizon i { position: absolute; z-index: 2; left: 18%; right: 18%; top: 50%; height: .12vh; background: rgba(255,255,255,.75); box-shadow: 0 -1.25vh 0 rgba(255,255,255,.45), 0 1.25vh 0 rgba(255,255,255,.45); }
+.aircraft-symbol { position: absolute; z-index: 4; left: 50%; top: 48%; transform: translate(-50%,-50%); color: #ffd45e; font: 900 1.4vh Arial; text-shadow: 0 0 .35vh #000; }
+.attitude-dial > strong { bottom: .45vh; padding: .18vh .45vh; border-radius: .3vh; background: rgba(0,0,0,.7); font-size: .65vh; white-space: nowrap; }
+.flight-readouts { display: grid; grid-template-columns: repeat(6, 1fr); gap: .35vh; margin-top: .65vh; }
+.flight-readouts > span { min-width: 0; padding: .42vh .25vh; border: .1vh solid rgba(88,184,220,.23); border-radius: .45vh; background: rgba(7,24,38,.82); text-align: center; }
+.flight-readouts small, .flight-readouts b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.flight-readouts small { color: #7698a7; font: 700 .62vh Arial; letter-spacing: .08em; }
+.flight-readouts b { margin-top: .18vh; color: #e9faff; font: 800 .72vh 'Courier New', monospace; }
+.flight-readouts .flight-fuel-readout {
+  --flight-fuel: 0; position: relative; overflow: hidden; isolation: isolate;
+  border-color: rgba(48,235,174,.58); box-shadow: inset 0 0 .65vh rgba(38,224,162,.1);
+}
+.flight-fuel-readout::before {
+  content: ''; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0;
+  height: calc(var(--flight-fuel) * 1%); background: linear-gradient(180deg, rgba(50,238,178,.2), rgba(14,161,116,.58));
+  transition: height .25s ease, background .2s ease;
+}
+.flight-fuel-readout small { color: #75f2cb; }
+.flight-fuel-readout b { color: #fff; font-size: .86vh; text-shadow: 0 0 .4vh rgba(44,245,180,.75); }
+.flight-fuel-readout.warning { border-color: rgba(255,188,72,.78); }
+.flight-fuel-readout.warning::before { background: linear-gradient(180deg, rgba(255,192,71,.2), rgba(211,126,21,.65)); }
+.flight-fuel-readout.warning small { color: #ffd077; }
+.flight-fuel-readout.critical { border-color: rgba(255,71,91,.85); animation: flightFuelPulse 1s ease-in-out infinite alternate; }
+.flight-fuel-readout.critical::before { background: linear-gradient(180deg, rgba(255,71,91,.24), rgba(184,20,49,.7)); }
+.flight-fuel-readout.critical small { color: #ff8d9b; }
+@keyframes flightFuelPulse { from { box-shadow: 0 0 0 rgba(255,55,75,0); } to { box-shadow: 0 0 .8vh rgba(255,55,75,.55); } }
+
+#main.theme-current #vehicle.aircraft { right: 1.5vh; bottom: 7.8vh; }
+#main.theme-current .flight-panel { border-radius: 1.25vh; }
+
+#main.theme-clean #vehicle.aircraft { right: 1.5vh; bottom: 1.8vh; }
+#main.theme-clean .flight-panel { --flight-dial: 8.55vh; width: 33.5vh; padding: .6vh; border-radius: .8vh; background: rgba(3,12,22,.88); }
+#main.theme-clean .flight-dials { gap: 1.05vh; }
+#main.theme-clean .dial-needle { height: 2.85vh; }
+#main.theme-clean .flight-readouts { grid-template-columns: repeat(3, 1fr); }
+
+#main.theme-racing #vehicle.aircraft { left: 50%; right: auto; bottom: 1.5vh; transform: translateX(-50%); }
+#main.theme-racing .flight-panel { --flight-accent: #43eaff; --flight-dial: 6.5vh; position: relative; width: 40vh; padding: .45vh .65vh; border-color: rgba(255,63,82,.7); border-radius: .7vh 1.8vh .7vh 1.8vh; background: linear-gradient(115deg, rgba(3,9,18,.97), rgba(23,8,15,.95)); box-shadow: 0 0 1.5vh rgba(255,42,72,.18), inset 0 -.25vh 0 rgba(255,48,74,.68); }
+#main.theme-racing .flight-header { display: none; }
+#main.theme-racing .flight-dials { grid-template-columns: repeat(3, var(--flight-dial)); gap: 3vh; }
+#main.theme-racing .flight-dial .dial-title { top: .72vh; font-size: .65vh; }
+#main.theme-racing .flight-dial > strong { bottom: 1.25vh; font-size: 1.18vh; }
+#main.theme-racing .flight-dial > small { bottom: .5vh; font-size: .62vh; }
+#main.theme-racing .dial-needle { height: 2.25vh; }
+#main.theme-racing .aircraft-symbol { font-size: .95vh; }
+#main.theme-racing .attitude-dial > strong { bottom: .18vh; font-size: .52vh; }
+#main.theme-racing .flight-readouts { margin-top: .32vh; gap: .3vh; }
+#main.theme-racing .flight-readouts > span { padding: .36vh .2vh; }
+#main.theme-racing .flight-readouts small { font-size: .7vh; }
+#main.theme-racing .flight-readouts b { margin-top: .12vh; font-size: .84vh; }
+#main.theme-racing .flight-fuel-readout b { font-size: .92vh; }
+
+/* HUD classica: mesma escala visual dos demais temas e blocos alinhados. */
+#main.theme-current .logo { width: 8vh; height: 7vh; top: .8vh; }
+#main.theme-current #info-stack { top: 1.6vh; right: 1vw; }
+#main.theme-current #status-stack { right: 1.5vh; bottom: 1.5vh; gap: .55vh; }
+#main.theme-current .status-box { width: 4.8vh; height: 4.8vh; }
+#main.theme-current #vehicle { right: 1.5vh; bottom: 8vh; gap: .6vh; }
+#main.theme-current .speedometer { width: 14.5vh; height: 14.5vh; }
+#main.theme-current .rpm-bars { margin-bottom: .55vh; }
+#main.theme-current #speed { font-size: 5.2vh; }
+#main.theme-current .gear { width: 4.6vh; height: 4.6vh; font-size: 1.8vh; }
+#main.theme-current .seatbelt { width: 4.2vh; height: 4.8vh; }
+#main.theme-current .gauge { width: 5vh; height: 12.2vh; }
+#main.theme-current .condition-stack { width: 6.2vh; height: 12.2vh; }
+
+/* HUD clean: informacao compacta ao redor do mapa no canto superior direito. */
+#main.theme-clean .logo { width: 8vh; height: 7vh; top: .8vh; }
+#main.theme-clean .info-box, #main.theme-racing .info-box { height: 3.8vh; font-size: 1.3vh; }
+#main.theme-clean .voice-box, #main.theme-racing .voice-box { height: 3.8vh; }
+#main.theme-clean .minimap-frame { top: 8.0vh; right: 1vw; border-color: rgba(113,224,255,.7); }
+#main.theme-clean #info-stack { top: 1.6vh; right: 1vw; }
+#main.theme-clean #status-stack { top: calc(var(--radar-bottom, 27vh) + 1.5vh); right: var(--radar-right, 1vw); bottom: auto; gap: .45vh; }
+#main.theme-clean.radar-hidden #info-stack { top: 1.6vh; }
+#main.theme-clean.radar-hidden #status-stack { top: 5.8vh; }
+#main.theme-clean .status-box {
+  width: 4.45vh; height: 4.45vh; border-radius: 50%; border-color: rgba(255,255,255,.2);
+  background: rgba(4, 12, 22, .72); box-shadow: 0 .25vh .9vh rgba(0,0,0,.35);
+}
+#main.theme-clean .status-box img { width: 1.6vh; height: 1.6vh; }
+#main.theme-clean .status-box span { font-size: 1.02vh; }
+#main.theme-clean #vehicle { right: 1.5vh; bottom: 2.0vh; gap: .45vh; }
+#main.theme-clean .speedometer {
+  width: 11.5vh; height: 7.2vh; border-radius: 1.15vh; border-width: .12vh;
+  background: linear-gradient(145deg, rgba(4,15,28,.92), rgba(3,7,14,.96));
+}
+#main.theme-clean .rpm-bars { width: 78%; height: .7vh; margin-bottom: .25vh; }
+#main.theme-clean #speed { font-size: 3.55vh; }
+#main.theme-clean #unit, #main.theme-clean #mileage { font-size: .85vh; }
+#main.theme-clean .gear { width: 3.8vh; height: 3.8vh; margin-right: -.8vh; font-size: 1.55vh; }
+#main.theme-clean .seatbelt { width: 3.7vh; height: 4.2vh; font-size: .95vh; }
+#main.theme-clean .seatbelt .belt-mark { font-size: 2.35vh; }
+#main.theme-clean .gauge { width: 4.2vh; height: 7.2vh; }
+#main.theme-clean .condition-stack { width: 5.6vh; height: 7.2vh; gap: .25vh; }
+#main.theme-clean .condition-gauge { padding: .35vh .4vh .65vh; }
+#main.theme-clean .condition-gauge > span, #main.theme-clean .condition-gauge > b { font-size: .82vh; }
+
+/* HUD racing: velocimetro central, telemetria horizontal e detalhes neon. */
+#main.theme-racing { --stroke: rgba(255, 63, 82, .58); --ob-electric: #43eaff; }
+#main.theme-racing .minimap-frame {
+  top: 8.0vh; left: 1vw; border-color: rgba(255,63,82,.8);
+  box-shadow: 0 0 1.2vh rgba(0,0,0,.72), 0 0 .8vh rgba(255,42,72,.24), inset 0 0 1vh rgba(67,234,255,.12);
+}
+#main.theme-racing .minimap-frame::before, #main.theme-racing .minimap-frame::after { border-color: #ff3f55; }
+#main.theme-racing .logo { width: 8vh; height: 7vh; top: .8vh; }
+#main.theme-racing #info-stack { top: calc(var(--radar-bottom, 27vh) + 1.5vh); left: var(--radar-left, 1vw); right: auto; }
+#main.theme-racing.radar-hidden #info-stack { top: 4.1vh; }
+#main.theme-racing #status-stack { right: 1.7vh; bottom: 1.5vh; gap: .4vh; }
+#main.theme-racing .status-box { width: 4.55vh; height: 4.55vh; border-radius: .45vh 1.15vh .45vh .45vh; }
+#main.theme-racing #vehicle {
+  left: 50%; right: auto; bottom: 1.7vh; transform: translateX(-50%); align-items: center; gap: .55vh;
+}
+#main.theme-racing .speedometer {
+  position: relative; width: 22vh; height: 8.6vh; border-radius: 1.1vh 3vh 1.1vh 3vh;
+  border: .18vh solid rgba(67,234,255,.55);
+  background: linear-gradient(115deg, rgba(3,9,18,.97), rgba(23,8,15,.94));
+  box-shadow: 0 0 1.8vh rgba(255,42,72,.2), inset 0 -.35vh 0 rgba(255,48,74,.7);
+}
+#main.theme-racing .rpm-bars { position: absolute; top: .65vh; width: 88%; height: .75vh; margin: 0; }
+#main.theme-racing #speed { font-family: 'Arial Narrow', Arial, sans-serif; font-size: 4.8vh; font-style: italic; }
+#main.theme-racing #unit { position: absolute; right: 2vh; top: 3.15vh; font-size: 1vh; color: #43eaff; }
+#main.theme-racing #mileage { position: absolute; right: 1.6vh; bottom: .7vh; font: 700 .85vh 'Courier New', monospace; }
+#main.theme-racing .gear {
+  width: 5.3vh; height: 5.3vh; margin-right: -1.4vh; border-radius: .8vh;
+  border-color: #ff3f55; color: #fff; background: rgba(25,5,10,.93); transform: skewX(-8deg);
+}
+#main.theme-racing .seatbelt { height: 5.4vh; border-color: rgba(255,63,82,.65); }
+#main.theme-racing .gauge { width: 4.8vh; height: 8.6vh; }
+#main.theme-racing .condition-stack { width: 6.3vh; height: 8.6vh; }
+
+/* Menu de configuracao */
+.settings-overlay {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; pointer-events: auto;
+  /* O backdrop-filter do CEF pode compor como preto no GTA Enhanced. A camada
+     transparente preserva a leitura do painel sem esconder o jogo. */
+  color: #edf8ff; background: rgba(0, 7, 16, .38);
+}
+.settings-panel {
+  width: min(1040px, 84vw); max-height: 86vh; overflow: hidden; border: 1px solid rgba(40,187,255,.55);
+  border-radius: 1.8vh; background: linear-gradient(145deg, rgba(3,15,31,.985), rgba(2,8,18,.99));
+  box-shadow: 0 2.5vh 7vh rgba(0,0,0,.62), inset 0 0 3vh rgba(12,116,205,.07);
+}
+.settings-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 2.6vh 3vh 2vh; border-bottom: 1px solid rgba(73,184,235,.22); }
+.settings-header small, .section-heading small { color: #35caff; font-weight: 800; letter-spacing: .22em; font-size: 1vh; }
+.settings-header h1 { margin: .45vh 0 .35vh; font-size: 2.8vh; }
+.settings-header p, .section-heading p { margin: 0; color: #8daac0; font-size: 1.15vh; }
+.settings-close {
+  width: 4.2vh; height: 4.2vh; border-radius: 1vh; border: 1px solid rgba(46,189,255,.58);
+  color: #eaf8ff; background: rgba(8,62,101,.55); font-size: 2.7vh; line-height: 1; cursor: pointer;
+}
+.settings-close:hover { background: #159fd9; }
+.settings-tabs { display: flex; gap: .7vh; padding: 1.4vh 3vh 0; }
+.settings-tab {
+  border: 0; border-bottom: .25vh solid transparent; padding: 1vh 1.4vh; color: #8facbf;
+  background: transparent; font-weight: 800; font-size: 1.15vh; cursor: pointer;
+}
+.settings-tab.active { color: #fff; border-color: #22c8ff; }
+.settings-content { padding: 1.8vh 3vh 2.2vh; max-height: 58vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #168ec4 rgba(4,17,31,.5); }
+.settings-page { display: none; }
+.settings-page.active { display: block; }
+.section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 2vh; margin-bottom: 1.25vh; }
+.section-heading h2 { margin: .25vh 0 0; font-size: 1.8vh; }
+.choice-grid { display: grid; gap: 1vh; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.compact-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.filter-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.choice-card {
+  position: relative; min-width: 0; padding: 1.15vh; border: 1px solid rgba(58,146,191,.3); border-radius: 1.1vh;
+  color: #e9f7ff; text-align: left; background: rgba(5,26,47,.7); cursor: pointer; transition: .15s ease;
+}
+.choice-card:hover { transform: translateY(-.15vh); border-color: rgba(55,203,255,.8); background: rgba(7,42,72,.82); }
+.choice-card.active { border-color: #31d0ff; background: linear-gradient(145deg, rgba(10,84,127,.75), rgba(5,35,62,.88)); box-shadow: 0 0 0 1px rgba(49,208,255,.24), 0 0 1.5vh rgba(19,154,222,.18); }
+.choice-card.active::after { content: 'ATIVO'; position: absolute; top: .65vh; right: .7vh; color: #64e2ff; font-size: .78vh; font-weight: 900; letter-spacing: .12em; }
+.choice-card strong, .choice-card small { display: block; }
+.choice-card strong { margin-top: .75vh; font-size: 1.25vh; }
+.choice-card small { margin-top: .3vh; color: #93adc0; font-size: .98vh; line-height: 1.35; }
+.theme-preview { position: relative; display: block; height: 11.5vh; overflow: hidden; border-radius: .75vh; background: linear-gradient(150deg, #102945, #07101d); }
+.theme-preview::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 45%, rgba(36,167,224,.12)); }
+.theme-preview i { position: absolute; display: block; width: 1.6vh; height: 1.6vh; bottom: .8vh; right: .8vh; border-radius: .35vh; background: #ef4658; box-shadow: -2vh 0 #f0bb42, -4vh 0 #3c9bf0; }
+.theme-preview b { position: absolute; right: 2vh; bottom: 4vh; font-size: 2.6vh; color: #fff; }
+.theme-preview span { position: absolute; right: 1vh; top: 1vh; width: 5.2vh; height: 3.8vh; border: .15vh solid #24bdf5; border-radius: .4vh; }
+.preview-current span { top: auto; right: auto; left: 1vh; bottom: 1vh; }
+.preview-clean b { right: 1.2vh; bottom: 3.3vh; font-size: 2vh; }
+.preview-clean i { border-radius: 50%; }
+.preview-racing b { left: 50%; right: auto; transform: translateX(-50%) skewX(-8deg); bottom: 1.4vh; color: #fff; font-style: italic; }
+.preview-racing::after { content: ''; position: absolute; left: 25%; right: 25%; bottom: .8vh; height: .25vh; background: #ff3d55; box-shadow: 0 0 .7vh #ff3d55; }
+.map-note { margin-top: 1.25vh; padding: 1vh 1.2vh; border-radius: .8vh; color: #a9c3d3; background: rgba(6,31,52,.62); font-size: 1.05vh; }
+.map-note span { margin-right: .7vh; color: #36cbff; font-weight: 900; letter-spacing: .12em; }
+.swatch { display: block; height: 4.2vh; border-radius: .65vh; border: 1px solid rgba(255,255,255,.12); }
+.swatch.default { background: linear-gradient(135deg, #5985a5, #c2d6dc 48%, #6f9566); }
+.swatch.realistic { background: linear-gradient(135deg, #405b6c, #a9cfdf 42%, #708873 70%, #d4e7ec); }
+.swatch.natural { background: linear-gradient(135deg, #397889, #80c9b5 42%, #8fae54 72%, #e4c96b); }
+.swatch.cinema { background: linear-gradient(135deg, #243340, #a08c70 52%, #39434b); }
+.swatch.vibrant { background: linear-gradient(135deg, #03a9f4, #ffca28 50%, #e91e63); }
+.swatch.contrast { background: linear-gradient(135deg, #05070a, #8a99a5 48%, #f1f6f8); }
+.perf-icon { display: grid; place-items: center; width: 4.2vh; height: 4.2vh; border-radius: .8vh; color: #66ddff; background: rgba(20,137,190,.17); border: 1px solid rgba(55,199,255,.4); font-weight: 900; font-size: 1vh; }
+.performance-heading { margin-top: 2.4vh; }
+.settings-footer { display: flex; align-items: center; justify-content: space-between; padding: 1.3vh 3vh; border-top: 1px solid rgba(73,184,235,.2); background: rgba(3,12,24,.72); }
+.settings-footer span { color: #7899af; font-size: 1vh; }
+.settings-footer span.error { color: #ff8191; }
+.settings-footer button { border: 1px solid rgba(255,85,103,.48); border-radius: .75vh; padding: .8vh 1.2vh; color: #ff9dab; background: rgba(121,21,39,.28); font-weight: 800; cursor: pointer; }
+.settings-footer button:hover { background: rgba(166,30,52,.5); color: #fff; }
+
+@media (max-width: 1100px) {
+  .settings-panel { width: 92vw; }
+  .compact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

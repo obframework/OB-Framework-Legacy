@@ -1,0 +1,47 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+  color: #f7fbff;
+  background: #07182b;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  color: #10253e;
+  background: #f3f7fb;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+input,
+button {
+  box-sizing: border-box;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px;
+  font: inherit;
+}
+
+button {
+  color: white;
+  background: #168eea;
+  cursor: pointer;
+}
+
+output {
+  min-height: 20px;
+}

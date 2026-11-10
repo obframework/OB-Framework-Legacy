@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OB Library</title>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}
+    #progress{position:fixed;left:50%;bottom:7vh;width:min(380px,calc(100vw - 40px));transform:translateX(-50%);pointer-events:none}
+    #progress[hidden]{display:none}
+    .progress-card{padding:13px 15px 14px}
+    #progress-label{display:block;margin-bottom:10px;color:var(--ob-text);font:700 13px Inter,"Segoe UI",Arial,sans-serif}
+    .track{height:8px;overflow:hidden;border:1px solid var(--ob-border);border-radius:999px;background:#020b15}
+    #fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--ob-accent-strong),var(--ob-accent));box-shadow:0 0 12px rgba(37,201,255,.72)}
+    #help{position:fixed;left:50%;bottom:12vh;max-width:min(560px,calc(100vw - 40px));transform:translateX(-50%);pointer-events:none}
+    #help[hidden]{display:none}
+    #help-text{display:block;padding:10px 15px;border-left:3px solid var(--ob-accent);border-radius:8px;color:var(--ob-text);background:rgba(3,20,38,.94);box-shadow:0 8px 28px rgba(0,0,0,.52);font:600 14px/1.35 Inter,"Segoe UI",Arial,sans-serif;text-align:center;white-space:pre-wrap}
+  </style>
+</head>
+<body>
+  <section id="progress" hidden aria-live="polite">
+    <div class="progress-card ob-panel">
+      <strong id="progress-label">Processando...</strong>
+      <div class="track"><i id="fill"></i></div>
+    </div>
+  </section>
+  <section id="help" hidden aria-live="polite">
+    <span id="help-text"></span>
+  </section>
+  <script>
+    const progress=document.querySelector('#progress');
+    const label=document.querySelector('#progress-label');
+    const fill=document.querySelector('#fill');
+    const help=document.querySelector('#help');
+    const helpText=document.querySelector('#help-text');
+    const cleanHelp=value=>String(value||'')
+      .replace(/~INPUT_CONTEXT~/gi,'[E]')
+      .replace(/~INPUT_CELLPHONE_CANCEL~/gi,'[ESC]')
+      .replace(/~INPUT_FRONTEND_CANCEL~/gi,'[ESC]')
+      .replace(/~INPUT_VEH_DUCK~/gi,'[X]')
+      .replace(/~[^~]+~/g,'')
+      .replace(/\s{2,}/g,' ')
+      .trim();
+    window.addEventListener('message',({data={}})=>{
+      if(data.action==='help'){
+        const text=cleanHelp(data.text);
+        help.hidden=data.visible!==true||!text;
+        helpText.textContent=text;
+        return;
+      }
+      if(data.action==='progress'){
+        if(data.open!==true){progress.hidden=true;fill.style.transition='none';fill.style.width='0';return;}
+        label.textContent=data.label||'Processando...';progress.hidden=false;fill.style.transition='none';fill.style.width='0';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{fill.style.transition=`width ${Math.max(250,Number(data.duration)||2500)}ms linear`;fill.style.width='100%'}));
+      }
+    });
+  </script>
+</body>
+</html>

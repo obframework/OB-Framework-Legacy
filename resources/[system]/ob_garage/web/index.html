@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <title>OB Garagens</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <header>
+      <div><small>OB FRAMEWORK</small><h1 id="title">Garagem</h1><p id="subtitle" class="hidden"></p></div>
+      <div id="vehicle-actions" class="actions">
+        <button id="refresh">Atualizar</button><button id="store">Guardar meu veículo</button><button id="store-nearby">Guardar veículo próximo</button><button class="close" id="close">Fechar ×</button>
+      </div>
+      <div id="admin-actions" class="actions hidden"><button class="close" id="admin-close">Fechar ×</button></div>
+    </header>
+
+    <section id="vehicle-view"><section id="list"></section></section>
+
+    <section id="admin-view" class="hidden">
+      <aside class="garage-sidebar">
+        <div class="sidebar-title"><div><small>CADASTROS</small><h2>Garagens</h2></div><button id="new-garage" type="button">+ Nova</button></div>
+        <div id="garage-list" class="garage-list"></div>
+      </aside>
+
+      <form id="garage-editor" class="garage-editor">
+        <div id="admin-feedback" class="admin-feedback hidden"></div>
+        <section class="editor-section">
+          <div class="section-title"><div><small>IDENTIFICAÇÃO</small><h2>Informações gerais</h2></div></div>
+          <div class="form-grid columns-2">
+            <label>Chave interna<input id="editor-id" maxlength="48" placeholder="hospital_publico" required></label>
+            <label>Nome exibido<input id="editor-label" maxlength="80" placeholder="Garagem do Hospital" required></label>
+            <label>Permissão da organização<input id="editor-permission" maxlength="64" placeholder="ambulance ou deixe vazio"></label>
+            <label class="check-field"><input id="editor-duty" type="checkbox"> Exigir que esteja em serviço</label>
+            <label>Tipo da garagem<select id="editor-type"><option value="personal">Pessoal</option><option value="service">Serviço</option><option value="free">Veículos gratuitos</option></select></label>
+            <label>Grupo compartilhado<input id="editor-shared-group" list="garage-group-options" maxlength="48" placeholder="Ex.: gratuitas_aeroporto"><datalist id="garage-group-options"></datalist></label>
+            <label>Conta econômica<input id="editor-account" maxlength="64" placeholder="ambulance, police..."></label>
+            <label>IPVA específico (%)<input id="editor-tax-rate" type="number" min="0" max="100" step="0.1" placeholder="Usar padrão da base"></label>
+            <label class="check-field"><input id="editor-tax-exempt" type="checkbox"> Isentar os veículos de IPVA</label>
+          </div>
+          <p class="section-help">Garagens do mesmo tipo com o mesmo grupo compartilham os veículos. Deixe vazio para manter esta garagem independente.</p>
+        </section>
+
+        <section class="editor-section">
+          <div class="section-title"><div><small>INTERAÇÃO</small><h2>Pontos da garagem</h2></div></div>
+          <div class="point-grid">
+            <article class="point-card"><div><b>Abertura</b><span id="open-point">Não capturado</span></div><button type="button" data-teleport="open">Teleportar</button><button type="button" data-capture="open">Capturar posição</button></article>
+            <article class="point-card"><div><b>Guardar veículo</b><span id="store-point">Não capturado</span></div><button type="button" data-teleport="store">Teleportar</button><button type="button" data-capture="store">Capturar posição</button></article>
+          </div>
+          <div class="form-grid columns-4 compact-grid">
+            <label>Área abrir X<input id="open-size-x" type="number" min="0.5" max="50" step="0.1"></label>
+            <label>Área abrir Y<input id="open-size-y" type="number" min="0.5" max="50" step="0.1"></label>
+            <label>Área guardar X<input id="store-size-x" type="number" min="0.5" max="50" step="0.1"></label>
+            <label>Área guardar Y<input id="store-size-y" type="number" min="0.5" max="50" step="0.1"></label>
+            <label>Distância para guardar<input id="store-distance" type="number" min="2" max="80" step="0.5"></label>
+            <label>Raio livre da vaga<input id="spawn-radius" type="number" min="0.75" max="10" step="0.05"></label>
+          </div>
+        </section>
+
+        <section class="editor-section">
+          <div class="section-title"><div><small>NASCIMENTO</small><h2>Vagas de saída</h2></div><button id="add-spawn" type="button">+ Capturar nova vaga</button></div>
+          <p class="section-help">Use “+ Capturar nova vaga” para adicionar cada posição de saída e depois salve. Na retirada, o sistema escolhe uma vaga livre; cada retirada reserva sua vaga enquanto o veículo é criado.</p>
+          <div id="spawn-list" class="row-list"></div>
+        </section>
+
+        <section class="editor-section">
+          <div class="section-title"><div><small>MAPA</small><h2>Blip</h2></div><label class="switch-field"><input id="blip-enabled" type="checkbox"> Mostrar no mapa</label></div>
+          <div id="blip-fields" class="form-grid columns-4">
+            <label>Legenda do mapa<input id="blip-label" value="Garagem" maxlength="80" placeholder="Garagem" title="Nome exibido no mapa. Deixe vazio para usar Garagem; use a mesma legenda para agrupar as garagens."></label>
+            <label>Sprite<input id="blip-sprite" type="number" min="0" max="1000"></label>
+            <label>Cor<input id="blip-color" type="number" min="0" max="100"></label>
+            <label>Escala<input id="blip-scale" type="number" min="0.2" max="3" step="0.01"></label>
+          </div>
+        </section>
+
+        <section class="editor-section">
+          <div class="section-title"><div><small>CATÁLOGO</small><h2>Veículos disponíveis</h2></div><button id="add-catalog" type="button">+ Veículo</button></div>
+          <p class="section-help">Deixe vazio em uma garagem pessoal comum. Garagens de serviço ou gratuitas podem oferecer veículos para aquisição única.</p>
+          <div id="catalog-list" class="catalog-list"></div>
+        </section>
+
+        <div class="editor-footer"><button id="delete-garage" class="danger" type="button">Remover garagem</button><button id="save-garage" class="primary" type="submit">Salvar e publicar</button></div>
+      </form>
+    </section>
+  </main>
+
+  <aside id="capture-hud" class="capture-hud hidden"><small>EDITOR DE GARAGENS</small><h2>Posicione-se no local</h2><p>E confirma · ESC cancela</p></aside>
+  <script src="app.js"></script>
+</body>
+</html>

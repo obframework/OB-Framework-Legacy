@@ -1,0 +1,17 @@
+OBDoorlock = {
+    EditorCommand = 'portaseditor',
+    AdminPermission = 'world.doors',
+    DefaultInteractionDistance = 2.0,
+    MaximumInteractionDistance = 8.0,
+    ScanIntervalMs = 250,
+    DrawDistance = 12.0,
+    NativeAudio = true,
+    MaximumDoorThickness = 0.65,
+    MinimumDoorHeight = 0.75,
+    MaximumDoorHeight = 6.0,
+    ServerDistanceTolerance = 1.5,
+    MaximumGroups = 100,
+    MaximumDoors = 1000,
+    MaximumPermissionsPerGroup = 12,
+    DatabaseRetryMs = 5000,
+}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OB Handling</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<main id="panel" hidden>
+  <header><div><small>OB FRAMEWORK · FERRAMENTAS</small><h1>Editor de handling <span id="car"></span></h1></div><button id="close" title="Restaurar e fechar">✕</button></header>
+  <p class="notice">Ajustes temporários neste carro. Teste em local seguro. Ao sair do veículo, fechar ou parar o recurso, os valores capturados ao abrir serão restaurados. Outros scripts de tuning/dano podem interferir.</p>
+  <nav><button id="editTab" class="active">Ajustar</button><button id="exportTab">Confirmar / exportar</button><input id="search" placeholder="Buscar campo ou categoria…"></nav>
+  <section id="editor"><div id="fields"></div></section>
+  <section id="exporter" hidden>
+    <p>Sem XML original: copie apenas os campos alterados e substitua as mesmas tags no <b>Item</b> do veículo. O trecho sozinho <b>não é um handling.meta completo</b>.</p>
+    <details><summary>Exportar XML completo preservando o original</summary>
+      <p>Cole ou abra o handling.meta original e selecione seu <b>handlingName</b>. O nome de exibição do carro não identifica necessariamente sua handling. Somente os campos alterados serão substituídos; flags, SubHandlingData e os demais veículos serão preservados.</p>
+      <input id="file" type="file" accept=".meta,.xml,text/xml"><textarea id="template" spellcheck="false" placeholder="Cole o XML original aqui. Ele não será aplicado ao carro nem enviado ao servidor."></textarea>
+      <button id="loadTemplate">Ler XML original</button><select id="entry"><option value="">Sem XML original</option></select>
+    </details>
+    <div class="export-actions"><button id="generate">Gerar texto atualizado</button><button id="copy">Copiar texto</button><span id="kind"></span></div>
+    <textarea id="output" readonly spellcheck="false" placeholder="Ajuste os valores e gere o texto aqui."></textarea>
+    <p>Não grava nem sobrescreve arquivos da base. “Copiar” leva o texto para a área de transferência. A configuração permanente só muda depois que você editar e carregar seu recurso de handling.</p>
+  </section>
+  <footer><span id="status" role="status">Pronto.</span><div><button id="restore">Restaurar valores</button><button id="drive" class="primary">Testar dirigindo</button></div></footer>
+</main>
+<script src="xml.js"></script><script src="app.js"></script>
+</body></html>

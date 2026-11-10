@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>OB Organizações</title>
+</head>
+<body>
+    <main id="app" class="hidden">
+        <aside>
+            <div class="brand"><span class="brand-mark">OB</span><div><strong>ORGANIZAÇÕES</strong><small id="modeLabel">PAINEL</small></div></div>
+            <div class="sidebar-context"><small>SELEÇÃO ATUAL</small><strong id="sidebarContext">Controle geral</strong></div>
+            <nav id="nav"></nav>
+            <div class="sidebar-footer">
+                <small>OB FRAMEWORK</small>
+                <button id="close" class="ghost danger">FECHAR PAINEL</button>
+            </div>
+        </aside>
+        <section class="workspace">
+            <header><div><h1 id="title">Organizações</h1><p id="subtitle"></p></div><button id="refresh" class="ghost">ATUALIZAR</button></header>
+            <div id="content"></div>
+        </section>
+    </main>
+    <div id="confirmModal" class="modal-backdrop hidden">
+        <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+            <div class="confirm-icon">!</div>
+            <div>
+                <small>CONFIRMAÇÃO</small>
+                <h2 id="confirmTitle">Confirmar ação</h2>
+                <p id="confirmMessage"></p>
+            </div>
+            <div class="confirm-actions">
+                <button id="confirmCancel" class="ghost">CANCELAR</button>
+                <button id="confirmAccept" class="danger-fill">EXCLUIR</button>
+            </div>
+        </section>
+    </div>
+    <div id="toast"></div>
+    <script src="app.js"></script>
+</body>
+</html>

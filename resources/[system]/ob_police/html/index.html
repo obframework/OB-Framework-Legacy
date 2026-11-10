@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>Revista policial</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <section class="window">
+      <header>
+        <div><small>OB POLICE</small><h1>Revista policial</h1><p id="identity"></p></div>
+        <button id="close" aria-label="Fechar">×</button>
+      </header>
+      <div class="notice">Os itens apreendidos são transferidos para o seu inventário.</div>
+      <div id="items" class="items"></div>
+      <p id="empty" class="empty hidden">Nenhum item encontrado.</p>
+      <footer>ESC para fechar</footer>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

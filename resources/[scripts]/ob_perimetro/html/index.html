@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Perímetros policiais</title><link rel="stylesheet" href="style.css"></head>
+<body><main id="panel" hidden>
+<header><div><small>OB · OPERAÇÕES POLICIAIS</small><h1>Controle de perímetro</h1></div><button id="close" aria-label="Fechar menu">×</button></header>
+<p class="intro">Sinalize uma área restrita e avise a cidade. O centro será a sua posição ao confirmar.</p>
+<form id="form"><label>Identificação<input id="name" maxlength="48" minlength="3" placeholder="Ex.: Ocorrência no Pacific" required autocomplete="off"></label>
+<div class="grid"><label>Raio (metros)<input id="radius" type="number" required></label><label>Duração (minutos)<input id="minutes" type="number" required></label></div>
+<button class="primary" type="submit">Interditar área</button></form>
+<p id="status" role="status"></p><div class="section"><h2>Perímetros ativos</h2><span id="count">0</span></div>
+<div id="areas"></div><footer>ESC para voltar · Sinalização de RP, sem barreira física</footer>
+</main><script src="app.js"></script></body></html>

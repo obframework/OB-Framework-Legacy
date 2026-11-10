@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>OB Economy</title>
+</head>
+<body>
+    <main id="app" class="hidden">
+        <section class="panel">
+            <header>
+                <div>
+                    <small>OB FRAMEWORK</small>
+                    <h1>Controle econômico</h1>
+                    <p id="statusText"></p>
+                </div>
+                <button id="close" class="icon" aria-label="Fechar">×</button>
+            </header>
+
+            <div id="accounts" class="accounts"></div>
+
+            <section class="toolbar">
+                <input id="term" placeholder="Buscar descrição, recurso ou ID">
+                <input id="category" placeholder="Categoria">
+                <button id="refresh">Atualizar</button>
+            </section>
+
+            <section class="content">
+                <div class="ledger-wrap">
+                    <table>
+                        <thead><tr><th>Data</th><th>Conta</th><th>Movimento</th><th>Categoria</th><th>Origem</th><th>Descrição</th><th>Saldo</th></tr></thead>
+                        <tbody id="ledger"></tbody>
+                    </table>
+                </div>
+                <form id="adjustForm">
+                    <small>AJUSTE ADMINISTRATIVO</small>
+                    <label>Conta<select id="accountKey"></select></label>
+                    <label>Operação<select id="direction"><option value="transfer">Transferir do Tesouro</option><option value="credit">Adicionar administrativamente</option><option value="debit">Retirar administrativamente</option></select></label>
+                    <label>Valor<input id="amount" type="number" min="1" step="1" required></label>
+                    <label>Motivo<textarea id="reason" maxlength="255" required></textarea></label>
+                    <button type="submit">Confirmar ajuste</button>
+                    <p id="feedback"></p>
+                </form>
+            </section>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

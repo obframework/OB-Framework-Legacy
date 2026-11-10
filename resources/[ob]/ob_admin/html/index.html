@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OB Framework - Admin</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="admin" class="hidden">
+  <section class="panel" aria-label="Painel administrativo">
+    <header class="panel-header">
+      <div class="brand"><span class="brand-symbol">OB</span><div><p class="eyebrow">OB FRAMEWORK</p><h1>Painel administrativo</h1></div></div>
+      <div class="header-status"><span class="online-dot"></span><span id="online-count" class="subtle">Carregando jogadores...</span><button id="close" class="icon-button" type="button" aria-label="Fechar painel">×</button></div>
+    </header>
+    <div class="content">
+      <aside class="players">
+        <div class="section-title"><span>JOGADORES ONLINE</span><button id="refresh" type="button">Atualizar</button></div>
+        <label class="search-box" for="player-search"><span>Buscar jogador</span><input id="player-search" type="search" placeholder="Nome, personagem ou ID fixo..." autocomplete="off"></label>
+        <div id="player-list" class="player-list"></div>
+      </aside>
+      <section class="details">
+        <div id="empty-state" class="empty-state"><span class="empty-symbol">OB</span><strong>Selecione um jogador</strong><span>Os dados e ações aparecem aqui.</span></div>
+        <div id="player-details" class="hidden">
+          <div class="profile-card">
+            <div id="selected-avatar" class="profile-avatar">OB</div>
+            <div class="profile-info"><p class="eyebrow">JOGADOR SELECIONADO</p><h2 id="selected-name">--</h2><p id="selected-character" class="subtle">--</p>
+              <dl><div><dt>ID fixo</dt><dd id="selected-user-id">--</dd></div><div><dt>ID da sessão</dt><dd id="selected-source">--</dd></div><div><dt>Ping</dt><dd id="selected-ping">--</dd></div><div><dt>Status</dt><dd id="selected-status">--</dd></div></dl>
+            </div>
+          </div>
+          <nav class="detail-tabs" role="tablist" aria-label="Funções administrativas">
+            <button id="tab-actions" type="button" role="tab" data-tab="actions" aria-controls="pane-actions" aria-selected="true">Ações</button>
+            <button id="tab-vehicles" type="button" role="tab" data-tab="vehicles" aria-controls="pane-vehicles" aria-selected="false">Veículos</button>
+            <button id="tab-tools" type="button" role="tab" data-tab="tools" aria-controls="pane-tools" aria-selected="false">Ferramentas</button>
+            <button id="tab-account" type="button" role="tab" data-tab="account" aria-controls="pane-account" aria-selected="false">Conta e cargos</button>
+          </nav>
+          <div class="tab-content">
+            <section id="pane-actions" data-pane="actions" role="tabpanel" aria-labelledby="tab-actions">
+              <div class="section-heading"><h3>Ações do jogador</h3><p>Aplicadas ao jogador selecionado acima.</p></div>
+              <div class="actions">
+                <button type="button" data-action="goto">Ir até</button><button type="button" data-action="bring">Trazer</button>
+                <button type="button" data-action="heal">Curar</button><button type="button" data-action="revive_full">Reviver completo</button>
+                <button type="button" data-action="reset_appearance">Refazer aparência</button>
+              </div>
+              <div class="danger-actions">
+                <button id="kick" class="danger" type="button">Expulsar</button><button id="block-character" class="danger warning" type="button">Bloquear personagem</button><button id="delete-character" class="danger destructive" type="button">Excluir personagem</button>
+              </div>
+            </section>
+            <section id="pane-vehicles" data-pane="vehicles" role="tabpanel" aria-labelledby="tab-vehicles" class="hidden">
+              <div class="section-heading"><h3>Veículo do jogador selecionado</h3></div>
+              <div class="actions"><button type="button" data-action="fix_vehicle">Reparar veículo</button></div>
+              <div class="utility-control">
+                <label>Veículos perto de você</label><p>Criação e remoção usam a sua posição.</p>
+                <div class="utility-actions"><button type="button" data-utility="dv">Remover veículo</button><button type="button" data-utility="dvarea">Limpar área 500 m</button></div>
+                <div id="car-control" class="vehicle-control"><input id="vehicle-model" type="text" maxlength="32" placeholder="Modelo: adder" autocomplete="off"><button id="spawn-vehicle" type="button">Criar veículo</button></div>
+              </div>
+            </section>
+            <section id="pane-tools" data-pane="tools" role="tabpanel" aria-labelledby="tab-tools" class="hidden">
+              <div class="section-heading"><h3>Ferramentas pessoais</h3><p>Atuam somente em você.</p></div>
+              <div class="utility-actions"><button type="button" data-utility="noclip">Noclip</button><button type="button" data-utility="wall">Wall</button><button type="button" data-utility="wallmap">Jogadores no mapa</button></div>
+            </section>
+            <section id="pane-account" data-pane="account" role="tabpanel" aria-labelledby="tab-account" class="hidden">
+              <div class="slot-control"><label for="slots">Limite de personagens</label><p>Vagas disponíveis nesta conta. Não altera personagens já criados.</p><div><select id="slots"></select><button id="save-slots" type="button">Salvar slots</button></div></div>
+              <div id="role-control" class="role-control hidden"><label for="role">Cargo administrativo</label><p>Somente o owner pode definir cargos. Owner não pode ser concedido pelo painel.</p><div><select id="role"></select><button id="save-role" type="button">Salvar cargo</button></div></div>
+            </section>
+            <p id="no-actions" class="subtle hidden">Seu cargo não possui ações disponíveis nesta categoria.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer><span><kbd>F11</kbd> Menu administrativo <kbd>ESC</kbd> Fechar</span><span>Todas as ações ficam registradas.</span></footer>
+  </section>
+  <section id="confirm-modal" class="confirm-modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><div class="confirm-card">
+    <p class="eyebrow">CONFIRMAR AÇÃO</p><h2 id="confirm-title">Confirmar ação</h2><p id="confirm-message" class="confirm-message">Tem certeza que deseja continuar?</p>
+    <div class="confirm-actions"><button id="confirm-cancel" class="confirm-cancel" type="button">Cancelar</button><button id="confirm-accept" class="confirm-accept" type="button">Confirmar</button></div>
+  </div></section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

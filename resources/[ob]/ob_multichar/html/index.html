@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OB Framework - Personagens</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main id="multichar" class="hidden">
+      <header class="brand"><span>OB</span><small>FRAMEWORK</small></header>
+      <section id="slots" class="slots" aria-label="Personagens"></section>
+      <section class="details">
+        <p class="eyebrow">DETALHES DO PERSONAGEM</p>
+        <h1 id="name">Novo personagem</h1>
+        <dl>
+          <div><dt>Slot</dt><dd id="slot">1</dd></div>
+          <div><dt>Genero</dt><dd id="gender">--</dd></div>
+          <div><dt>Nascimento</dt><dd id="birthdate">--</dd></div>
+          <div><dt>Nacionalidade</dt><dd id="nationality">Disponivel</dd></div>
+        </dl>
+        <button id="play" type="button"><span>▶</span><span id="play-label">CRIAR PERSONAGEM</span></button>
+      </section>
+      <p class="hint">Selecione um slot para visualizar • O personagem e exibido no mundo</p>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="app.css?v=20261019-group"><title>Lenhador</title></head>
+<body>
+  <main id="app" class="hidden">
+    <aside>
+      <div class="brand"><span>🌲</span><b>Lenhador</b></div>
+      <button class="nav active" data-tab="overview"><span class="nav-icon">⌂</span><span>Visão geral</span></button>
+      <button class="nav" data-tab="progress"><span class="nav-icon">↗</span><span>Progresso</span></button>
+      <button class="nav" data-tab="cargo"><span class="nav-icon">🪵</span><span>Carga</span></button>
+      <button class="nav" data-tab="group"><span class="nav-icon">👥</span><span>Dupla</span><em id="groupCount">1/2</em></button>
+      <button class="nav" data-tab="ranking"><span class="nav-icon">🏆</span><span>Ranking</span></button>
+      <button class="nav" data-tab="tutorial"><span class="nav-icon">▶</span><span>Tutorial</span></button>
+    </aside>
+    <section class="content">
+      <header><h1 id="title">Visão geral</h1><button id="close" class="close">Fechar <b>ESC</b></button></header>
+      <div id="overview" class="tab active">
+        <div class="grid two"><article class="card"><span>Nível atual</span><strong id="level">1</strong><small id="xpText">0 / 600 XP</small><div class="bar"><i id="xpBar"></i></div></article><article class="card"><span>Status do trabalho</span><strong id="workStatus">Fora de serviço</strong><small id="workInfo">Fale com o responsável para começar</small><button id="startWork" class="primary">Iniciar serviço</button></article></div>
+        <div class="grid three"><article class="card"><span>Cargas entregues</span><strong id="completed">0</strong></article><article class="card"><span>Ganhos totais</span><strong id="earned" data-ob-money="0">$0</strong></article><article class="card"><span>Bônus de nível</span><strong id="bonus">+0%</strong></article></div>
+        <article class="card hint"><b>Como funciona</b><p>Corte árvores, carregue a madeira no Mule e entregue uma carga completa na serraria.</p></article>
+      </div>
+      <div id="progress" class="tab"><article class="card progress-card"><div class="progress-head"><h2>Progresso profissional</h2><strong id="progressLevel">Nível: 1</strong></div><div class="bar large"><i id="progressBar"></i></div><p id="progressDetails">0%</p></article><article class="card preview"><div class="preview-head"><h2 id="previewTitle">Nível: 1</h2><div><button id="prev" class="mini">←</button><button id="next" class="mini">→</button></div></div><div class="grid two"><article class="stat"><span>XP total necessário</span><strong id="previewXp">0 XP</strong></article><article class="stat"><span>Bônus de pagamento</span><strong id="previewBonus">0%</strong></article></div><article class="stat full"><span>Benefício</span><strong id="previewText">Pagamento padrão da serraria.</strong></article></article></div>
+      <div id="cargo" class="tab"><div class="grid two"><article class="card cargo-card"><span>Madeira no caminhão</span><strong id="cargoAmount">0 / 20</strong><div class="bar"><i id="cargoBar"></i></div><p>Carregue a madeira pelo alvo na traseira do Mule.</p></article><article class="card"><span>Entrega</span><strong id="deliveryState">Aguardando carga</strong><small>Ao completar a carga, a rota da serraria será marcada.</small></article></div><article class="card hint"><b>Dica</b><p>Uma carga completa rende o pagamento e a experiência. Madeira na mochila só vale depois de ser carregada e descarregada.</p></article></div>
+      <div id="group" class="tab"><article class="card"><div class="group-head"><div><h2>Dupla de lenhadores</h2><p>O líder inicia o serviço. Os dois cortam, carregam e recebem sua parte da entrega.</p></div><button id="leaveGroup" class="secondary">Sair da dupla</button></div><h3>Integrantes</h3><section id="groupMembers" class="people"></section></article><article class="card"><h2>Jogadores próximos</h2><p class="muted">Convide uma pessoa próxima antes de iniciar o trabalho.</p><section id="nearbyPlayers" class="people"></section></article></div>
+      <div id="ranking" class="tab"><div class="ranking-layout"><article class="card"><h2>Ranking por experiência</h2><div class="ranking-row head"><b>Posição</b><b>Jogador</b><b>XP</b></div><section id="leaderboard"></section></article><article class="card rank-side"><h2>Sua colocação</h2><div class="orb"><span>POSIÇÃO</span><strong id="rank">#-</strong></div><b id="rankValue">0 XP</b></article></div></div>
+      <div id="tutorial" class="tab"><article class="card"><b>GUIA EM VIDEO</b><h2 id="tutorialTitle">Tutorial</h2><p id="tutorialEmpty">O tutorial ainda nao foi configurado.</p><iframe id="tutorialVideo" title="Tutorial do trabalho" style="display:none;width:100%;height:440px;border:0;border-radius:12px;background:#07101f" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></article></div>
+    </section>
+  </main>
+  <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+  <script src="app.js?v=20261019-group"></script>
+</body></html>

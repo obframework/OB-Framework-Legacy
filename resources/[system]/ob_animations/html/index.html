@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OB Emotes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" class="hidden">
+    <section class="panel">
+      <header>
+        <div>
+          <small>OB ANIMATIONS</small>
+          <h1>Emotes</h1>
+        </div>
+        <button id="close" class="close" type="button" aria-label="Fechar">×</button>
+      </header>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Procurar animação..." autocomplete="off">
+        <select id="category" aria-label="Categoria"></select>
+      </div>
+      <div id="emotes" class="emotes"></div>
+      <footer>
+        <button id="stop" class="stop" type="button">PARAR ANIMAÇÃO</button>
+        <span>X: mãos levantadas · Segure B: apontar</span>
+      </footer>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

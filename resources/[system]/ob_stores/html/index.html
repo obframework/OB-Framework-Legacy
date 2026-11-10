@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>OB Stores</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <section class="panel">
+      <header><h1 id="title">Loja</h1><div class="checkout"><span id="checkoutPrice" class="hidden"></span><button id="save">Salvar</button><button id="cancel" class="ghost">Cancelar</button></div></header>
+      <div id="categories" class="categories"></div>
+      <div id="itemsView" class="hidden">
+        <div class="toolbar"><button id="back" class="ghost">Voltar</button><strong id="categoryTitle"></strong><div id="textureControl" class="adjust hidden"><span>Variação</span><button id="texturePrev" class="ghost">&lt;</button><b id="textureValue">1/1</b><button id="textureNext" class="ghost">&gt;</button></div><div id="colorControl" class="adjust hidden"><span>Cor</span><button id="colorPrev" class="ghost">&lt;</button><b id="colorValue">1/1</b><button id="colorNext" class="ghost">&gt;</button></div></div>
+        <div id="items" class="items"></div>
+        <div id="pager" class="pager"><button id="prev" class="ghost">Anterior</button><span id="page">Pagina 1 / 1</span><button id="next" class="ghost">Proxima</button></div>
+      </div>
+      <footer>A/D gira o personagem | Scroll aproxima</footer>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

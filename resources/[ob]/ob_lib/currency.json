@@ -1,0 +1,10 @@
+{
+  "code": "USD",
+  "locale": "en-US",
+  "symbol": "$",
+  "symbolPosition": "before",
+  "spaceBetween": false,
+  "decimals": 0,
+  "thousandsSeparator": ",",
+  "decimalSeparator": "."
+}

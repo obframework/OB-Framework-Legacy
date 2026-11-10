@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OB Chat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main id="chat" aria-live="polite">
+        <section id="messages" class="messages"></section>
+        <section id="composer" class="composer hidden">
+            <div class="input-row">
+                <input id="input" type="text" maxlength="300" autocomplete="off" spellcheck="false" aria-label="Digite um comando">
+                <kbd>ESC</kbd>
+            </div>
+            <div id="error" class="error"></div>
+            <div id="suggestions" class="suggestions"></div>
+            <div class="hint"><span>↑ ↓ navegar</span><span>TAB completar</span><span>ENTER executar</span></div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

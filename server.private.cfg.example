@@ -1,0 +1,10 @@
+# Copie este arquivo para server.private.cfg e substitua os indicadores.
+# Nunca publique o arquivo preenchido.
+
+sv_licenseKey "CFX_KEY"
+set ob_development_mode "false"
+set ob_database_connection_string "mysql://LOGIN:SENHA@HOST:3306/NOME_DO_BANCO?charset=utf8mb4"
+set ob_database_pool_size "10"
+set rcon_password "SENHA_RCON"
+set ob_whitelist_discord_token "DISCORD_BOT_TOKEN"
+set ob_phone_fivemanage_key "FIVEMANAGE_KEY"

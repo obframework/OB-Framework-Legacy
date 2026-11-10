@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <title>OB Phone</title>
+  </head>
+  <body>
+    <aside
+      id="callPill"
+      class="closed-phone-card hidden"
+      aria-live="polite"
+    ></aside>
+    <aside
+      id="closedNotification"
+      class="closed-phone-card hidden"
+      aria-live="polite"
+    ></aside>
+    <main id="phone" class="hidden">
+      <div class="screen" data-wallpaper="ocean">
+        <header>
+          <span id="clock">00:00</span>
+          <div class="status">
+            <span class="signal" aria-label="Sinal"
+              ><i></i><i></i><i></i><i></i></span
+            ><span id="battery">100%</span
+            ><span class="battery-icon"><i id="batteryFill"></i></span>
+          </div>
+        </header>
+        <section id="deviceGuard" class="device-guard hidden" aria-live="polite"></section>
+        <section id="lock">
+          <p class="date"></p>
+          <h1 id="lockTime">00:00</h1>
+          <div class="lock-brand">
+            <b>OB</b><span>Seu mundo.<br />Na sua mão.</span>
+          </div>
+          <button id="unlock">
+            Deslize ou clique para desbloquear <span>↑</span>
+          </button>
+        </section>
+        <section id="home" class="hidden">
+          <div class="wall">
+            <p class="eyebrow">CONECTADO À CIDADE</p>
+            <h1 id="time">00:00</h1>
+            <p class="date"></p>
+            <span id="number"></span>
+          </div>
+          <div id="apps" class="apps"></div>
+          <div class="page-dots"><i></i></div>
+          <nav id="dock"></nav>
+        </section>
+        <section id="view" class="hidden">
+          <div class="top">
+            <button id="back" aria-label="Tela inicial">‹</button
+            ><b id="title"></b
+            ><button id="refresh" aria-label="Atualizar">↻</button>
+          </div>
+          <div id="content"></div>
+        </section>
+        <section id="callScreen" class="hidden" aria-live="polite"></section>
+        <div id="notificationBanner" class="hidden" role="status"></div>
+        <div id="toast" class="hidden" role="status"></div>
+        <button id="homeBar" aria-label="Tela inicial"></button>
+      </div>
+      <img
+        id="caseFrame"
+        class="case-frame"
+        src="assets/case-blue.webp"
+        alt=""
+      />
+    </main>
+    <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@citizenfx/three@0.100.0/build/three.min.js"></script>
+    <script src="media.js"></script>
+    <script src="video-call.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/apps/communication.js"></script>
+    <script src="js/apps/obgram.js"></script>
+    <script src="js/apps/settings-store.js"></script>
+    <script src="js/apps/services.js"></script>
+    <script src="js/apps/emergency.js"></script>
+    <script src="js/apps/gallery.js"></script>
+    <script src="js/apps/camera.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/actions.js"></script>
+    <script src="js/runtime.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

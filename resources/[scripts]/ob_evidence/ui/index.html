@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="scrollbar.css">
+  <title>Sistema Integrado de Pericia</title>
+</head>
+<body>
+  <main id="terminal" class="terminal hidden" aria-hidden="true">
+    <header class="topbar">
+      <div class="brandmark">OB</div>
+      <div class="brand"><span>POLICIA CIENTIFICA</span><strong>Sistema Integrado de Pericia</strong></div>
+      <div class="terminal-state"><i></i><span id="connectionText">TERMINAL SEGURO</span></div>
+      <time id="clock">00:00</time>
+      <button id="close" class="window-close" aria-label="Encerrar terminal">×</button>
+    </header>
+
+    <div class="workspace">
+      <aside>
+        <div class="operator"><span class="avatar">PC</span><div><small>ESTACAO ATIVA</small><strong id="labName">Laboratorio</strong></div></div>
+        <nav>
+          <button class="nav active" data-view="dashboard"><span>⌂</span>Visao geral</button>
+          <button class="nav" data-view="ballistics"><span>◎</span>Balistica <b id="navCasing">0</b></button>
+          <button class="nav" data-view="fingerprints"><span>⌁</span>Datiloscopia <b id="navFingerprint">0</b></button>
+          <button class="nav" data-view="reports"><span>▤</span>Historico de laudos</button>
+        </nav>
+        <div class="side-note"><span>RETENCAO AUTOMATICA</span><strong id="retention">4 dias</strong><p>Vestigios temporarios sao removidos ao vencer.</p></div>
+      </aside>
+
+      <section class="content">
+        <div id="offline" class="alert hidden"><strong>Arquivo indisponivel</strong><span>A conexao com a base pericial nao esta pronta.</span></div>
+
+        <section class="view active" data-page="dashboard">
+          <div class="page-head"><div><span class="kicker">CENTRAL DE ANALISE</span><h1>Visao geral</h1><p>Acompanhe evidencias, armas e cadastros ativos.</p></div><button class="ghost refresh">↻ Sincronizar</button></div>
+          <div class="stats">
+            <article><span class="stat-icon cyan">◎</span><div><small>ESTOJOS PARA ANALISE</small><strong id="statCasings">0</strong><p>lacrados no inventario</p></div></article>
+            <article><span class="stat-icon violet">⌁</span><div><small>AMOSTRAS DIGITAIS</small><strong id="statFingerprints">0</strong><p>aguardando cadastro</p></div></article>
+            <article><span class="stat-icon green">⌕</span><div><small>ARMAS SEM REGISTRO</small><strong id="statWeapons">0</strong><p>guardadas e periciaveis</p></div></article>
+            <article><span class="stat-icon amber">▤</span><div><small>LAUDOS NO HISTORICO</small><strong id="statReports">0</strong><p>registros recentes</p></div></article>
+          </div>
+          <div class="dashboard-grid">
+            <article class="module quick"><div class="module-title"><div><span class="kicker">ACOES RAPIDAS</span><h2>Nova analise</h2></div></div>
+              <button class="quick-action" data-go="ballistics"><span class="quick-icon">◎</span><div><strong>Laboratorio balistico</strong><small>Arquivar estojo ou examinar uma arma guardada</small></div><em>›</em></button>
+              <button class="quick-action" data-go="fingerprints"><span class="quick-icon">⌁</span><div><strong>Cadastro datiloscopico</strong><small>Registrar amostra e confrontar vestigios</small></div><em>›</em></button>
+            </article>
+            <article class="module recent"><div class="module-title"><div><span class="kicker">ATIVIDADE RECENTE</span><h2>Ultimos laudos</h2></div><button class="text-link" data-go="reports">Ver todos</button></div><div id="recentReports" class="compact-list"></div></article>
+          </div>
+        </section>
+
+        <section class="view" data-page="ballistics">
+          <div class="page-head"><div><span class="kicker">LABORATORIO BALISTICO</span><h1>Balistica</h1><p>Cadastre estojos e confronte somente armas sem registro, sem equipa-las.</p></div><button class="ghost refresh">↻ Sincronizar</button></div>
+          <div class="analysis-grid">
+            <article class="module action-panel"><div class="module-title"><div><span class="kicker">EVIDENCIA LACRADA</span><h2>Analisar estojo</h2></div><span class="counter" id="casingCount">0</span></div><p>O proximo estojo sera consumido, catalogado e mantido no arquivo pelo periodo configurado.</p><button id="analyzeCasing" class="primary">Cadastrar proximo estojo</button></article>
+            <article class="module action-panel"><div class="module-title"><div><span class="kicker">EXAME SEM CONTAMINACAO</span><h2>Examinar arma</h2></div><span id="kitStatus" class="status-pill">Kit ausente</span></div><p>Selecione uma arma guardada. Ela nao sera equipada e nenhuma digital sera alterada.</p><div class="select-wrap"><select id="weaponSelect"><option value="">Selecione uma arma...</option></select></div><button id="scanWeapon" class="primary">Iniciar confronto balistico</button></article>
+          </div>
+          <article class="module table-module"><div class="module-title"><div><span class="kicker">ARQUIVO ATIVO</span><h2>Estojos cadastrados</h2></div><label class="search">⌕ <input id="ballisticSearch" placeholder="Buscar numero ou calibre"></label></div><div class="table-head ballistic"><span>ARQUIVO</span><span>CALIBRE</span><span>CADASTRADO</span><span>VALIDADE</span></div><div id="archiveRows" class="table-body"></div></article>
+        </section>
+
+        <section class="view" data-page="fingerprints">
+          <div class="page-head"><div><span class="kicker">IDENTIFICACAO HUMANA</span><h1>Datiloscopia</h1><p>Cadastre amostras e encontre vestigios associados em armas e estojos.</p></div><button class="ghost refresh">↻ Sincronizar</button></div>
+          <article class="module fingerprint-action"><div><span class="scanner"><i></i>⌁</span><div><span class="kicker">AMOSTRAS NO INVENTARIO</span><h2><b id="fingerprintCount">0</b> aguardando analise</h2><p>A identidade somente passa a aparecer nos confrontos depois deste cadastro.</p></div></div><button id="analyzeFingerprint" class="primary">Cadastrar e confrontar proxima</button></article>
+          <article class="module table-module"><div class="module-title"><div><span class="kicker">BASE DATILOSCOPICA</span><h2>Pessoas cadastradas</h2></div><label class="search">⌕ <input id="fingerprintSearch" placeholder="Buscar nome, ID ou codigo"></label></div><div class="table-head fingerprints"><span>CODIGO</span><span>PESSOA</span><span>ID</span><span>CADASTRADA EM</span></div><div id="fingerprintRows" class="table-body"></div></article>
+        </section>
+
+        <section class="view" data-page="reports">
+          <div class="page-head"><div><span class="kicker">CADEIA DE CUSTODIA</span><h1>Historico de laudos</h1><p>Consulte os registros mais recentes salvos no sistema pericial.</p></div><button class="ghost refresh">↻ Sincronizar</button></div>
+          <article class="module table-module"><div class="module-title"><div><span class="kicker">REGISTROS</span><h2>Laudos emitidos</h2></div><label class="search">⌕ <input id="reportSearch" placeholder="Buscar tipo, serial ou conteudo"></label></div><div class="table-head reports"><span>LAUDO</span><span>TIPO</span><span>REFERENCIA</span><span>DATA</span><span></span></div><div id="reportRows" class="table-body"></div></article>
+        </section>
+      </section>
+    </div>
+
+    <footer class="statusbar"><span><i></i> Conexao criptografada</span><span id="footerStats">0 registros carregados</span><span>OB-FORENSICS v1.0</span></footer>
+  </main>
+
+  <div id="detail" class="detail hidden"><div class="detail-card"><div class="detail-head"><div><span class="kicker">LAUDO DIGITAL</span><h2 id="detailTitle">Detalhes</h2></div><button id="detailClose" class="window-close">×</button></div><div id="detailMeta" class="detail-meta"></div><div id="detailText" class="report-paper"></div></div></div>
+  <script src="app.js"></script>
+</body>
+</html>

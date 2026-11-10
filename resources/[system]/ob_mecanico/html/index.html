@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>OB Customs</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <div id="camera-zone" class="camera-zone" aria-label="Arraste para girar a camera"></div>
+    <section class="customs-hud" aria-label="Oficina">
+      <div class="context-bar">
+        <button id="back" class="context-action concealed" type="button" aria-label="Voltar">
+          <span aria-hidden="true">&#8592;</span>
+        </button>
+        <div class="context-copy">
+          <small>OB CUSTOMS</small>
+          <strong id="title">Oficina</strong>
+        </div>
+        <div class="context-total">
+          <span>Total atual</span>
+          <strong id="total-price">$0</strong>
+        </div>
+        <div class="context-page">
+          <span id="context">Menu principal</span>
+          <b id="counter">1/5</b>
+        </div>
+      </div>
+
+      <div class="menu-shell">
+        <div id="viewport" class="card-viewport">
+          <div id="cards" class="card-rail"></div>
+        </div>
+      </div>
+
+      <div class="control-hints">
+        <span id="drag-hint">Arraste a faixa ou role o mouse</span>
+        <span>Arraste fora do painel para girar o carro</span>
+        <span><kbd>&#8592;</kbd><kbd>&#8594;</kbd> navegar</span>
+        <span><kbd>Enter</kbd> selecionar</span>
+        <span><kbd>Esc</kbd> voltar / sair</span>
+      </div>
+    </section>
+  </main>
+
+  <section id="color-picker" class="color-overlay hidden" aria-label="Seletor de cores">
+    <div class="color-dialog">
+      <header class="color-header">
+        <div><small id="color-shop">OB CUSTOMS</small><h2 id="color-title">Selecionar cor</h2></div>
+        <button id="color-close" type="button" aria-label="Fechar seletor">&#215;</button>
+      </header>
+      <div class="color-editor">
+        <label class="color-preview" for="color-native"><i id="color-preview"></i><span>Prévia da cor</span></label>
+        <input id="color-native" type="color" value="#168ed2" aria-label="Escolher cor">
+        <label class="hex-field"><span>HEX</span><input id="color-hex" type="text" maxlength="7" value="#168ED2" spellcheck="false"></label>
+      </div>
+      <div id="color-palette" class="color-palette"></div>
+      <p id="color-note">Escolha um tom ou digite uma cor hexadecimal.</p>
+      <footer class="color-actions">
+        <button id="color-cancel" class="secondary" type="button">Cancelar</button>
+        <button id="color-apply" type="button">Usar esta cor</button>
+      </footer>
+    </div>
+  </section>
+
+  <section id="service-progress" class="service-progress hidden">
+    <div class="service-card">
+      <div class="service-header"><span>OB OFICINA</span><b id="service-label">Processando...</b></div>
+      <div class="service-track"><i id="service-fill"></i></div>
+    </div>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OB MDT</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="hidden">
+    <div class="tablet">
+      <aside class="sidebar">
+        <header>
+          <div class="brand-mark">OB</div>
+          <div><h1>OB MDT</h1><p id="modeLabel">Polícia</p></div>
+        </header>
+        <div id="profile" class="profile"></div>
+        <nav>
+          <button data-tab="people" class="active">Consulta de pessoas</button>
+          <button data-tab="record" data-police>Registrar ocorrência</button>
+          <button data-tab="plate" data-police>Consulta de placa</button>
+          <button data-tab="clear" data-clear>Limpeza de ficha</button>
+          <button data-tab="audit" data-audit>Histórico de limpezas</button>
+        </nav>
+        <button id="closeBtn" class="danger">Fechar MDT</button>
+      </aside>
+
+      <main class="content">
+        <section id="tab-people" class="tab active">
+          <div class="section-title"><div><span>CONSULTA</span><h2>Buscar personagem</h2></div></div>
+          <div class="search-row"><input id="personTerm" placeholder="ID fixo ou nome do personagem"><button id="searchPerson">Buscar</button></div>
+          <div id="peopleResults" class="results"></div>
+          <div id="historyResults" class="results"></div>
+        </section>
+
+        <section id="tab-record" class="tab">
+          <div class="section-title"><div><span>POLÍCIA</span><h2>Registrar ocorrência e sentença</h2></div></div>
+          <div class="search-row"><input id="suspectTerm" placeholder="ID fixo ou nome do suspeito"><button id="addSuspect">Adicionar</button></div>
+          <div id="suspects" class="chips"></div>
+          <div class="form-block">
+            <div class="block-head"><div><small>TIPIFICAÇÃO</small><strong>Crimes selecionados</strong></div><button id="openCrimes">Selecionar crimes</button></div>
+            <div id="selectedCrimes" class="chips"></div>
+          </div>
+          <div class="grid two"><label>Meses<input id="months" type="number" min="0"></label><label>Multa pendente<input id="fine" type="number" min="0"></label></div>
+          <label>Resumo da ocorrência<textarea id="reason" placeholder="Descreva os fatos e a abordagem"></textarea></label>
+          <div class="grid two"><label>Foto do suspeito (URL)<input id="mugshotUrl" placeholder="https://..."></label><label>Foto do inventário (URL)<input id="inventoryPhotoUrl" placeholder="https://..."></label></div>
+          <div class="grid two previews"><img id="mugshotPreview" alt="Prévia do suspeito"><img id="inventoryPreview" alt="Prévia do inventário"></div>
+          <label>Itens apreendidos<textarea id="seizedItems" placeholder="Itens, quantidades e observações"></textarea></label>
+          <div class="grid two"><label>Fiança ($)<input id="bailAmount" type="number" min="0"></label><label class="check"><input id="lawyerRequired" type="checkbox"> Exigir advogado para a fiança</label></div>
+          <button id="createRecord" class="primary wide">Registrar ocorrência</button>
+          <div id="recordResponse"></div>
+        </section>
+
+        <section id="tab-plate" class="tab">
+          <div class="section-title"><div><span>VEÍCULOS</span><h2>Consulta de placa</h2></div></div>
+          <div class="search-row"><input id="plateTerm" placeholder="ABC1234"><button id="searchPlate">Consultar</button></div>
+          <div id="plateResult" class="results"></div>
+        </section>
+
+        <section id="tab-clear" class="tab">
+          <div class="section-title"><div><span>REGISTROS</span><h2>Limpeza de ficha</h2></div></div>
+          <div class="notice">Use o ID de um registro ativo. A ficha não é apagada: ela fica marcada como limpa e a ação permanece no histórico.</div>
+          <div class="grid two"><label>ID do registro<input id="clearRecordId" type="number" min="1"></label><label>Motivo<input id="clearReason" placeholder="Justificativa obrigatória"></label></div>
+          <button id="clearRecord" class="primary">Confirmar limpeza</button>
+          <div id="clearResponse"></div>
+        </section>
+
+        <section id="tab-audit" class="tab">
+          <div class="section-title"><div><span>HISTÓRICO</span><h2>Limpezas realizadas</h2></div><button id="loadAudit">Atualizar</button></div>
+          <div class="notice">Esta tela é somente para consulta. Ela mostra qual registro foi limpo, por quem, quando e o motivo informado.</div>
+          <div id="auditResults" class="results"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="crimesModal" class="modal hidden">
+      <div class="modal-card">
+        <div class="section-title"><div><span>CÓDIGO PENAL</span><h2>Selecionar crimes</h2></div><button id="closeCrimes" class="danger">Fechar</button></div>
+        <div id="crimeCatalog" class="crime-list"></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

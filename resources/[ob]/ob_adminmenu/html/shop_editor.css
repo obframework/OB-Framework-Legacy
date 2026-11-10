@@ -1,0 +1,31 @@
+#shop-editor { position:fixed; inset:4vh 3vw; z-index:100; color:#e9f7ff; font-family:Arial,sans-serif; }
+#shop-editor * { box-sizing:border-box; }
+#shop-editor .se-shell { height:100%; display:flex; flex-direction:column; padding:20px; border:1px solid #278fc2; border-radius:16px; background:linear-gradient(135deg,#082c45,#041827); box-shadow:0 20px 80px #0009; }
+#shop-editor header { flex:none; display:flex; align-items:center; justify-content:space-between; padding:0 0 16px; border-bottom:1px solid #21536d; }
+#shop-editor h1 { font-size:24px; margin:5px 0; } #shop-editor h2 { font-size:17px; margin:0 0 12px; }
+#shop-editor small { color:#5fcaff; font-size:10px; letter-spacing:1px; } #shop-editor p { color:#a0bdce; font-size:12px; line-height:1.5; }
+#shop-editor button { cursor:pointer; border:1px solid #287aa2; border-radius:7px; padding:10px 14px; background:#0d3f5a; color:#e9f7ff; font-weight:700; font-size:12px; }
+#shop-editor button:hover { background:#116994; border-color:#67d7ff; } #shop-editor button:disabled { opacity:.5; cursor:wait; }
+#shop-editor .se-layout { flex:1; min-height:0; display:grid; grid-template-columns:250px minmax(0,1fr); gap:18px; padding-top:16px; }
+#shop-editor .se-layout>aside { display:flex; flex-direction:column; min-height:0; }
+#shop-editor .se-tools { display:flex; flex-wrap:wrap; gap:8px; padding-bottom:12px; } #shop-editor .se-tools input { flex-basis:100%; }
+#se-list { flex:1; min-height:0; overflow-y:auto; padding:0 6px 14px 0; }
+#shop-editor #se-list button { display:block; width:100%; text-align:left; margin:0 0 8px; }
+#shop-editor #se-list small { display:block; margin-top:6px; letter-spacing:0; overflow-wrap:anywhere; }
+#shop-editor #se-list .se-selected { background:#086995; border-color:#69d7ff; }
+#se-form { overflow-y:auto; min-height:0; padding:0 14px; background:#051e30; border:1px solid #20516b; border-radius:10px; }
+#shop-editor #se-fields>section { padding:18px 0; border-bottom:1px solid #1b4055; }
+#shop-editor .se-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+#shop-editor label { display:flex; flex-direction:column; gap:6px; color:#a5cbdf; font-size:12px; }
+#shop-editor input, #shop-editor select { min-width:0; width:100%; color:#eff9ff; background:#031725; border:1px solid #286c90; border-radius:6px; padding:9px; font:inherit; outline:none; }
+#shop-editor input:focus, #shop-editor select:focus { border-color:#5acbff; }
+#shop-editor .se-check { flex-direction:row; align-items:center; min-height:38px; gap:8px; } #shop-editor .se-check input { width:17px; height:17px; accent-color:#29b7ef; }
+#shop-editor .se-product { display:grid; grid-template-columns:1.5fr 1fr 1fr auto; align-items:end; gap:10px; padding:12px; border:1px solid #23536a; border-radius:8px; margin:10px 0; }
+#shop-editor .se-section-head { display:flex; align-items:center; justify-content:space-between; }
+#shop-editor .se-categories { margin-top:15px; } #shop-editor fieldset { border:1px solid #286c90; border-radius:8px; display:flex; flex-wrap:wrap; gap:8px 20px; padding:12px; } #shop-editor legend { color:#63c6f2; font-size:12px; }
+#shop-editor footer { position:sticky; bottom:0; display:flex; justify-content:space-between; gap:12px; padding:15px 0; background:#051e30; border-top:1px solid #286c90; }
+#shop-editor #se-save { background:#087fb1; } #shop-editor #se-delete, #shop-editor #se-close { background:#632b3d; border-color:#974458; }
+#se-feedback:not(:empty) { position:sticky; top:0; padding:12px; background:#692b37; border-radius:7px; color:white; z-index:2; font-size:13px; } #se-feedback.se-success:not(:empty) { background:#14634e; }
+#se-capture { position:fixed; z-index:101; bottom:6vh; left:50%; transform:translateX(-50%); background:#062538; border:1px solid #4dcbff; border-radius:10px; padding:18px; color:#e9f7ff; font:14px Arial,sans-serif; }
+#shop-editor ::-webkit-scrollbar { width:7px; } #shop-editor ::-webkit-scrollbar-thumb { background:#2e92bb; border-radius:6px; }
+@media(max-width:1100px) { #shop-editor .se-layout { grid-template-columns:210px minmax(0,1fr); } #shop-editor .se-product { grid-template-columns:1fr 1fr; } }

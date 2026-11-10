@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="garage.css">
+  <link rel="stylesheet" href="offline.css">
+  <title>OB Administração</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <section class="window">
+      <header>
+        <div>
+          <small>OB FRAMEWORK</small>
+          <h1 id="page-title">Administração</h1>
+          <p id="page-description">Ferramentas e editores autorizados</p>
+        </div>
+        <button id="close" class="icon-button" type="button" aria-label="Fechar">×</button>
+      </header>
+      <div id="home-page" class="page"><div id="modules" class="modules"></div></div>
+      <div id="garage-page" class="page hidden">
+        <div class="page-actions">
+          <button id="garage-back" class="secondary" type="button">← Voltar</button>
+          <form id="garage-search" class="inline-form">
+            <label>ID fixo do personagem<input id="garage-user-id" inputmode="numeric" min="1" placeholder="Ex.: 12" required></label>
+            <button type="submit">Consultar garagem</button>
+          </form>
+        </div>
+        <div id="garage-feedback" class="feedback hidden"></div>
+        <div id="garage-owner" class="owner-card hidden"></div>
+        <form id="garage-give" class="give-card hidden">
+          <div class="card-title">
+            <div><small>ENTREGA ADMINISTRATIVA</small><h2>Adicionar veículo</h2></div>
+            <span>A placa pode ficar vazia para ser gerada automaticamente.</span>
+          </div>
+          <div class="form-grid">
+            <label>Modelo<input id="give-model" maxlength="64" placeholder="sultan" required></label>
+            <label>Nome exibido<input id="give-label" maxlength="96" placeholder="Sultan"></label>
+            <label>Placa opcional<input id="give-plate" maxlength="8" placeholder="OB12345"></label>
+            <label>Garagem<input id="give-garage" maxlength="48" value="central" required></label>
+          </div>
+          <button type="submit">Adicionar à garagem</button>
+        </form>
+        <div class="vehicle-heading"><h2>Veículos</h2><span id="vehicle-count">Consulte um personagem</span></div>
+        <div id="garage-vehicles" class="vehicle-list empty">Nenhuma consulta realizada.</div>
+      </div>
+      <div id="blackout-page" class="page hidden">
+        <div class="page-actions blackout-topbar">
+          <button id="blackout-back" class="secondary" type="button">← Voltar</button>
+          <button id="blackout-refresh" class="secondary" type="button">Atualizar estado</button>
+        </div>
+        <div id="blackout-feedback" class="feedback hidden"></div>
+        <div class="blackout-status-card">
+          <div><small>FORNECIMENTO</small><strong id="blackout-active">Consultando...</strong></div>
+          <div><small>MODO</small><strong id="blackout-mode">—</strong></div>
+          <div><small>HORÁRIO DA CIDADE</small><strong id="blackout-clock">—</strong></div>
+          <div><small>AUTOMÁTICO 19:00–06:00</small><strong id="blackout-scheduled">—</strong></div>
+        </div>
+        <div class="blackout-controls">
+          <button type="button" data-blackout="off" class="danger">Desligar energia</button>
+          <button type="button" data-blackout="on" class="success-button">Ligar energia</button>
+          <button type="button" data-blackout="auto">Voltar ao automático</button>
+        </div>
+        <p class="blackout-help">O modo manual do administrador permanece ativo até selecionar “Voltar ao automático”. Alterações pelo item duram somente até a próxima mudança da agenda.</p>
+      </div>
+      <div id="offline-page" class="page hidden">
+        <div class="page-actions offline-toolbar">
+          <button id="offline-back" class="secondary" type="button">&larr; Voltar</button>
+          <form id="offline-search" class="inline-form">
+            <label>Nome, conta ou ID fixo<input id="offline-query" maxlength="80" placeholder="Pesquisar jogadores"></label>
+            <button type="submit">Pesquisar</button>
+          </form>
+          <button id="offline-wipe-open" class="danger hidden" type="button">Wipe protegido</button>
+        </div>
+        <div id="offline-feedback" class="feedback hidden"></div>
+        <div class="offline-layout">
+          <aside id="offline-results" class="offline-results"><p>Pesquise uma conta ou personagem.</p></aside>
+          <section id="offline-detail" class="offline-detail"><p>Selecione um personagem para consultar os dados.</p></section>
+        </div>
+      </div>
+      <footer>F11 abre o menu · ESC fecha</footer>
+    </section>
+  </main>
+  <aside id="laser-hud" class="laser-hud hidden">
+    <small>MIRA DE ENTIDADES</small><h2 id="laser-type">Mundo</h2><dl id="laser-data"></dl><p>C copia os dados · ESC fecha</p>
+  </aside>
+  <link rel="stylesheet" href="shop_editor.css">
+  <script src="app.js"></script>
+  <script src="offline.js"></script>
+  <script src="shop_editor.js"></script>
+</body>
+</html>

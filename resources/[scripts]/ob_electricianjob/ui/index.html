@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="repair.css">
+  <title>Eletricista</title>
+</head>
+<body>
+<section id="jobHud" class="hidden" aria-live="polite"><small id="hudRoute"></small><h3 id="hudTitle"></h3><b id="hudStep"></b><p id="hudInstruction"></p></section>
+<section id="repair" class="hidden" role="dialog" aria-label="Manutenção elétrica">
+  <div class="repair-panel"><div class="repair-top"><span>MANUTENÇÃO ELÉTRICA</span><button id="repairCancel">Cancelar · ESC</button></div>
+  <h2 id="repairTitle"></h2><p id="repairHint"></p><div class="repair-status"><span id="repairTime"></span><span id="repairErrors"></span></div>
+  <div id="repairBoard"></div><p id="repairFeedback" aria-live="polite"></p></div>
+</section>
+<main id="app" class="hidden">
+  <aside>
+    <div class="brand"><span>⚡</span><b>Eletricista</b></div>
+    <button class="nav active" data-tab="overview"><span class="nav-icon">⌂</span><span>Visão geral</span></button>
+    <button class="nav" data-tab="progress"><span class="nav-icon">↗</span><span>Progresso</span></button>
+    <button class="nav" data-tab="group"><span class="nav-icon">👥</span><span>Dupla</span><em id="groupCount">1/2</em></button>
+    <button class="nav" data-tab="ranking"><span class="nav-icon">🏆</span><span>Ranking</span></button>
+    <button class="nav" data-tab="tutorial"><span class="nav-icon">▶</span><span>Tutorial</span></button>
+  </aside>
+  <section class="content">
+    <header><h1 id="title">Visão geral</h1><button id="close" class="close">Fechar <b>ESC</b></button></header>
+    <section id="overview" class="tab active">
+      <div class="grid two">
+        <article class="card"><span>Nível atual</span><strong id="level">1</strong><small id="xpText">0 / 500 XP</small><div class="bar"><i id="xpBar"></i></div></article>
+        <article class="card turn-card"><span>Status do turno</span><strong id="status">Fora de turno</strong><small id="statusInfo">Fale com o encarregado</small><p id="turnHint">Sozinho você recebe serviços no solo. Em dupla, também recebe chamados em postes.</p><div class="turn-actions"><button id="start" class="action primary">Iniciar turno</button><button id="truck" class="action secondary hidden">Retirar caminhão</button></div></article>
+      </div>
+      <div class="grid three">
+        <article class="card"><span>Reparos concluídos</span><strong id="repairs">0</strong></article>
+        <article class="card"><span>Ganhos totais</span><strong id="earned" data-ob-money="0">$0</strong></article>
+        <article class="card"><span>Bônus de nível</span><strong id="bonus">+0%</strong></article>
+      </div>
+      <article class="card hint"><b>Fluxo do serviço</b><p>Leve o caminhão até a área do chamado e pegue a ferramenta em qualquer uma das laterais. Cada chamado tem três etapas: soltar parafusos, conectar cabos e ajustar a tensão. Volte ao caminhão para trocar a ferramenta entre as etapas. Ao terminar, guarde a ferramenta e finalize o chamado na lateral do veículo. Dinheiro e XP são pagos a cada 5 serviços completos.</p></article>
+    </section>
+    <section id="progress" class="tab">
+      <article class="card progress-overview"><div class="progress-head"><h2>Progresso do nível atual</h2><strong id="progressLevel">Nível: 1</strong></div><div class="bar large"><i id="progressBar"></i></div><p id="progressText">0%</p></article>
+      <article class="card level-preview">
+        <div class="preview-head"><h2 id="previewTitle">Nível: 1</h2><div class="preview-arrows"><button id="previewPrev" class="mini" aria-label="Nível anterior">←</button><button id="previewNext" class="mini" aria-label="Próximo nível">→</button></div></div>
+        <div class="preview-grid"><div><span>XP necessário</span><strong id="previewXp">0 XP</strong></div><div><span>Bônus de pagamento</span><strong id="previewMoney">+0%</strong></div></div>
+        <div class="preview-benefit"><b>Benefícios do nível</b><p id="previewBenefit">Pagamento base do serviço liberado.</p></div>
+      </article>
+    </section>
+    <section id="group" class="tab">
+      <div class="group-head"><div><h2>Equipe de eletricistas</h2><p id="groupDescription">Convide uma pessoa próxima para liberar serviços aéreos.</p></div><button id="leaveGroup" class="outline hidden">Sair da dupla</button></div>
+      <h3>Integrantes</h3><div id="members" class="people"></div>
+      <h3>Jogadores próximos</h3><div id="nearby" class="people"></div>
+    </section>
+    <section id="ranking" class="tab">
+      <div class="ranking-layout">
+        <article class="card ranking-card">
+          <div class="ranking-head"><span>Ranking geral</span><div><button id="rankRepairs" class="mini">Reparos</button><button id="rankXp" class="mini active-mini">Mais XP</button></div></div>
+          <div class="ranking-table"><div class="ranking-row table-head"><b>Posição</b><b>Eletricista</b><b id="rankValueTitle">XP</b></div><div id="leaderboard"></div></div>
+        </article>
+        <article class="card rank-side"><span id="rankSideTitle">Mais experiência</span><p>Sua posição</p><strong id="myRank">#-</strong><b id="myRankValue">0 XP</b></article>
+      </div>
+    </section>
+    <section id="tutorial" class="tab"><article class="card"><b>GUIA EM VÍDEO</b><h2 id="tutorialTitle">Tutorial</h2><p id="tutorialEmpty">O tutorial ainda não foi configurado.</p><iframe id="tutorialVideo" title="Tutorial" class="video" allowfullscreen></iframe></article></section>
+  </section>
+</main>
+<script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+<script src="app.js"></script>
+<script src="repair.js"></script>
+</body>
+</html>

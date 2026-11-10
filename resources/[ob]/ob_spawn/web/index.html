@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main id="spawn" class="hidden">
+    <div class="backdrop"></div>
+    <section class="spawn-layout" aria-label="Escolha de local de nascimento">
+      <div class="map-side">
+        <div class="map-frame">
+          <img src="mapa.jpg" alt="Mapa de Los Santos" class="map-image">
+          <div class="map-shade"></div>
+          <div id="markers" class="markers"></div>
+          <div class="map-topline"><span>San Andreas</span><b>Seleção de chegada</b></div>
+          <div id="map-caption" class="map-caption"><span class="pulse"></span><span>Selecione um marcador no mapa</span></div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="brand"><span></span> ORBIS ROLEPLAY</div>
+        <p class="eyebrow">CHEGADA À CIDADE</p>
+        <h1>Escolha seu ponto de chegada</h1>
+        <p class="description">Selecione onde deseja iniciar sua chegada à cidade.</p>
+        <div id="selected" class="selected empty">
+          <span class="selected-icon">⌖</span>
+          <div><small>LOCAL ESCOLHIDO</small><strong>Selecione um ponto</strong><p>Use o mapa ou a lista abaixo</p></div>
+        </div>
+        <div id="options" class="options"></div>
+        <button id="confirm" class="confirm" type="button" disabled>Confirmar local</button>
+        <p class="hint">Clique no mapa ou em um dos locais para continuar.</p>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

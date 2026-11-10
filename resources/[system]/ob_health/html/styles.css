@@ -1,0 +1,174 @@
+:root { font-family: Arial, Helvetica, sans-serif; color: #fff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; overflow: hidden; background: transparent; }
+.hidden { display: none !important; }
+
+#death {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 44%, rgba(3, 65, 141, .30), rgba(0, 0, 0, .91) 58%);
+  backdrop-filter: blur(2px);
+}
+
+.death-content { width: min(560px, calc(100vw - 40px)); text-align: center; text-shadow: 0 2px 16px #000; }
+
+.heartbeat { width: 105px; height: 24px; margin: 0 auto 4px; overflow: hidden; position: relative; }
+.heartbeat::before, .heartbeat::after, .heartbeat i {
+  content: '';
+  display: block;
+  position: absolute;
+  background: #17c8ff;
+  height: 2px;
+  transform-origin: left center;
+  box-shadow: 0 0 8px rgba(23, 200, 255, .72);
+}
+.heartbeat::before { width: 33px; left: 0; top: 12px; }
+.heartbeat i { width: 16px; left: 31px; top: 12px; transform: rotate(-42deg); }
+.heartbeat::after { width: 58px; left: 44px; top: 12px; transform: rotate(8deg); }
+
+.eyebrow { margin: 0; color: #fff; font-size: clamp(17px, 2vw, 23px); font-weight: 900; letter-spacing: .32em; }
+h1 { margin: -3px 0 23px; color: #fff; font-size: clamp(52px, 7vw, 86px); font-weight: 950; letter-spacing: .08em; line-height: .9; }
+.cause-label { margin: 0 0 6px; color: #38b7ff; font-size: 11px; font-weight: 900; letter-spacing: .22em; }
+.cause { margin: 0; color: #fff; font-size: 20px; font-weight: 800; }
+.detail { min-height: 22px; margin: 8px auto 18px; color: rgba(255, 255, 255, .72); font-size: 14px; }
+strong { display: block; margin: 0 0 16px; color: #fff; font-size: 28px; letter-spacing: .12em; }
+
+button {
+  width: min(332px, 100%);
+  min-height: 38px;
+  border: 0;
+  border-radius: 3px;
+  background: #0877df;
+  color: #fff;
+  font: 800 11px/1 Arial, Helvetica, sans-serif;
+  letter-spacing: .05em;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 91, 205, .42);
+}
+button:disabled { background: #082c59; color: rgba(255, 255, 255, .65); cursor: not-allowed; box-shadow: none; }
+button:not(:disabled):hover { background: #129cf0; }
+.npc-rescue { display: block; margin: 9px auto 0; border: 1px solid rgba(73, 198, 249, .58); background: rgba(5, 48, 77, .82); box-shadow: none; }
+
+#medical {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+}
+
+.medical-panel {
+  width: min(620px, calc(100vw - 40px));
+  overflow: hidden;
+  border: 1px solid rgba(49, 181, 244, .72);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(5, 31, 51, .98), rgba(2, 16, 29, .98));
+  box-shadow: 0 25px 70px rgba(0, 0, 0, .66), inset 0 1px rgba(125, 220, 255, .08);
+}
+
+.medical-panel header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(47, 144, 193, .42);
+  background: linear-gradient(90deg, rgba(9, 61, 94, .6), rgba(4, 28, 47, .2));
+}
+
+.medical-panel header p { margin: 0 0 4px; color: #5bcaff; font-size: 10px; font-weight: 900; letter-spacing: .22em; }
+.medical-panel h2 { margin: 0; color: #effaff; font-size: 24px; }
+
+button.medical-close {
+  width: 38px;
+  min-height: 38px;
+  border: 1px solid rgba(80, 198, 250, .35);
+  border-radius: 9px;
+  background: #103d5b;
+  box-shadow: none;
+  font-size: 24px;
+}
+
+.patient-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 20px 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(48, 151, 203, .32);
+  border-radius: 10px;
+  color: #a8cbdc;
+  background: rgba(4, 23, 38, .74);
+  font-size: 13px;
+}
+
+.patient-state strong { margin: 0; color: #61d2ff; font-size: 14px; letter-spacing: .04em; }
+.patient-state.downed { border-color: rgba(245, 84, 104, .45); }
+.patient-state.downed strong { color: #ff8b9b; }
+
+.medical-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px 20px 20px;
+}
+
+.medical-actions button {
+  display: grid;
+  width: 100%;
+  min-height: 76px;
+  padding: 13px 15px;
+  border: 1px solid rgba(47, 158, 215, .36);
+  border-radius: 10px;
+  background: linear-gradient(145deg, #0b3b5c, #072841);
+  box-shadow: none;
+  text-align: left;
+  letter-spacing: 0;
+}
+
+.medical-actions button:hover { border-color: #57caff; background: linear-gradient(145deg, #126b9e, #0b4569); }
+.medical-actions button:disabled { opacity: .34; background: #09253a; }
+.medical-actions b { color: #f2fbff; font-size: 14px; }
+.medical-actions small { margin-top: 5px; color: #91b8cb; font-size: 10px; font-weight: 600; line-height: 1.25; }
+.medical-hint { margin: -6px 0 15px; color: #779db1; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-align: center; }
+
+#body-scan { position: fixed; inset: 0; display: grid; place-items: center; background: transparent; }
+.scan-panel { width: min(960px, calc(100vw - 40px)); height: min(650px, calc(100vh - 40px)); overflow: hidden; border: 1px solid rgba(53, 193, 255, .76); border-radius: 17px; background: linear-gradient(145deg, rgba(4, 31, 51, .99), rgba(1, 12, 23, .99)); box-shadow: 0 28px 90px rgba(0, 0, 0, .75), inset 0 1px rgba(125, 220, 255, .09); }
+.scan-header { display: grid; grid-template-columns: 1fr auto 42px; gap: 22px; align-items: center; min-height: 86px; padding: 16px 20px; border-bottom: 1px solid rgba(47, 144, 193, .42); background: linear-gradient(90deg, rgba(9, 69, 106, .7), rgba(4, 28, 47, .25)); }
+.scan-header p, .report-title p { margin: 0 0 5px; color: #5bcaff; font-size: 9px; font-weight: 900; letter-spacing: .2em; }
+.scan-header h2, .report-title h3 { margin: 0; color: #effaff; font-size: 22px; }
+.scan-vitals { display: flex; gap: 12px; align-items: center; color: #91b8cb; font-size: 10px; font-weight: 900; letter-spacing: .09em; }
+.scan-vitals strong { margin: 0; padding-left: 12px; border-left: 1px solid rgba(80, 198, 250, .35); color: #61d2ff; font-size: 18px; letter-spacing: .03em; }
+.scan-content { display: grid; grid-template-columns: 42% 58%; height: calc(100% - 86px); }
+.body-map { position: relative; display: grid; place-items: center; overflow: hidden; border-right: 1px solid rgba(47, 144, 193, .3); background: radial-gradient(circle, rgba(10, 90, 130, .22), transparent 60%); }
+.scan-grid { position: absolute; inset: 0; opacity: .18; background-image: linear-gradient(rgba(58, 189, 246, .25) 1px, transparent 1px), linear-gradient(90deg, rgba(58, 189, 246, .25) 1px, transparent 1px); background-size: 22px 22px; }
+.body-map svg { position: relative; height: 88%; filter: drop-shadow(0 0 16px rgba(64, 205, 255, .28)); }
+.body-map svg g { fill: rgba(56, 151, 190, .18); stroke: #5fcfff; stroke-width: 2; transition: .2s ease; }
+.body-map svg g.injured { fill: rgba(255, 79, 105, .52); stroke: #ff6d83; filter: drop-shadow(0 0 8px rgba(255, 55, 87, .75)); }
+.body-map svg g.severe { fill: rgba(255, 37, 67, .82); }
+.scan-legend { position: absolute; left: 18px; bottom: 16px; color: #88afc3; font-size: 10px; }
+.scan-legend i { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: #ff526d; box-shadow: 0 0 8px #ff526d; }
+.injury-report { min-width: 0; padding: 22px; overflow: hidden; }
+.report-title { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid rgba(47, 144, 193, .25); }
+.report-title h3 { font-size: 19px; }
+#injury-count { min-width: 34px; padding: 8px; border: 1px solid rgba(80, 198, 250, .38); border-radius: 9px; color: #60d2ff; background: #0b3854; font-weight: 900; text-align: center; }
+.injury-list { height: calc(100% - 112px); padding: 14px 4px 14px 0; overflow-y: auto; scrollbar-color: #1686bc #071f30; }
+.injury-empty { display: grid; place-items: center; height: 100%; color: #7fa9bc; text-align: center; }
+.injury-card { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; margin-bottom: 9px; padding: 13px; border: 1px solid rgba(48, 151, 203, .34); border-radius: 10px; background: rgba(5, 35, 54, .72); }
+.injury-card h4 { margin: 0 0 5px; color: #effaff; font-size: 14px; }
+.injury-card p { margin: 0; color: #8fb9cb; font-size: 10px; line-height: 1.45; }
+.injury-card em { color: #ff8395; font-style: normal; font-weight: 900; }
+.injury-card button { width: 118px; min-height: 38px; border-radius: 8px; box-shadow: none; }
+.severity-bar { width: 100%; height: 4px; margin-top: 8px; overflow: hidden; border-radius: 3px; background: #082338; }
+.severity-bar i { display: block; height: 100%; background: linear-gradient(90deg, #efb84e, #ff526d); }
+.scan-note { margin: 0; color: #658da1; font-size: 9px; line-height: 1.45; }
+
+@media (max-width: 720px) {
+  .scan-panel { height: calc(100vh - 20px); }
+  .scan-content { grid-template-columns: 34% 66%; }
+  .scan-header { grid-template-columns: 1fr 42px; }
+  .scan-vitals { display: none; }
+  .injury-card { grid-template-columns: 1fr; }
+  .injury-card button { width: 100%; }
+}

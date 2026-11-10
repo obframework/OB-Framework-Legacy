@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Alerta de terremoto</title>
+<style>html, body { margin: 0; width: 0; height: 0; overflow: hidden; background: transparent; }</style></head>
+<body>
+<audio id="alert" preload="none"></audio>
+<script>
+  const alertAudio = document.getElementById('alert');
+  window.addEventListener('message', ({ data }) => {
+    if (data?.action === 'stopAlert') {
+      alertAudio.pause();
+      alertAudio.currentTime = 0;
+      return;
+    }
+    if (data?.action !== 'playAlert' || !data.file) return;
+    alertAudio.pause();
+    alertAudio.src = `../${data.file}`;
+    const volume = Number(data.volume);
+    alertAudio.volume = Math.max(0, Math.min(1, Number.isFinite(volume) ? volume : 0.8));
+    alertAudio.currentTime = 0;
+    alertAudio.play().catch(() => {});
+  });
+</script>
+</body>
+</html>

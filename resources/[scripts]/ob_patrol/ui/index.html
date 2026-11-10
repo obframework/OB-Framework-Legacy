@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="app.css?v=20261019-routes">
+  <title>Patrulhamento</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <header>
+      <div><span class="eyebrow">CENTRAL DE OPERACOES</span><h1 id="title">Iniciar patrulha</h1><p id="subtitle">Escolha a regiao. A ronda continuara trocando de rota automaticamente.</p></div>
+      <button id="close">Fechar <b>ESC</b></button>
+    </header>
+    <section id="activeStatus" class="active-status hidden">
+      <div><small>PATRULHA ATIVA</small><strong id="activeRoute">Rota atual</strong><span id="activeProgress">Checkpoint</span></div>
+      <button id="stopPatrol" class="danger">Encerrar patrulha</button>
+    </section>
+    <section id="patrolPanel" class="layout">
+      <div>
+        <h2>Escolha a regiao</h2>
+        <section class="regions">
+          <button class="region south" data-region="south"><span class="icon">🌆</span><span><b>Sul da cidade</b><small>Centro, Davis, Porto e Vespucci</small><em id="southRoutes">0 rotas disponiveis</em></span><i>→</i></button>
+          <button class="region north" data-region="north"><span class="icon">🏜️</span><span><b>Norte da cidade</b><small>Sandy Shores, Paleto e rodovias</small><em id="northRoutes">0 rotas disponiveis</em></span><i>→</i></button>
+        </section>
+        <article class="tutorial">
+          <h2>Como funciona</h2>
+          <div class="steps"><span><b>1</b><small>Monte o grupo e escolha Sul ou Norte.</small></span><span><b>2</b><small>Cada checkpoint paga entre $100 e $250.</small></span><span><b>3</b><small>Dirija uma viatura autorizada e respeite o limite.</small></span><span><b>4</b><small>A ronda e infinita e troca de rota sozinha.</small></span></div>
+        </article>
+      </div>
+      <aside>
+        <div class="group-title"><div><h2>Grupo de patrulha</h2><small id="groupCount">1/4 integrantes</small></div><button id="leaveGroup">Sair</button></div>
+        <h3>Integrantes</h3><section id="members" class="people"></section>
+        <h3>Policiais proximos</h3><section id="nearby" class="people"></section>
+      </aside>
+    </section>
+    <section id="routeAdmin" class="admin hidden">
+      <div class="admin-heading"><div><span class="eyebrow">STAFF</span><h2>Gerenciador de rotas</h2><p>Crie, renomeie, mova entre regioes, regrave os pontos ou exclua rotas.</p></div></div>
+      <div class="new-route"><input id="newRouteLabel" maxlength="64" placeholder="Nome da nova rota"><select id="newRouteRegion"><option value="south">Sul</option><option value="north">Norte</option></select><button id="newRoute">Gravar nova rota</button></div>
+      <div id="routeList" class="route-list"></div>
+      <p class="admin-help">Ao iniciar uma gravacao, dirija e use <b>/patrulhaponto</b> em cada local. Finalize com <b>/patrulhasalvar</b> ou cancele com <b>/patrulhacancelar</b>.</p>
+    </section>
+    <footer id="patrolFooter"><span>🚓 Limitador</span><strong id="speedLimit">60 km/h</strong><small><b>/patrulha</b> alterna o limite · <b>/patrulhasair</b> encerra o servico</small></footer>
+  </main>
+  <script src="app.js?v=20261019-routes"></script>
+</body>
+</html>

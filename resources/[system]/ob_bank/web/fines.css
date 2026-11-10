@@ -1,0 +1,44 @@
+.fine-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 16px 0;
+    padding: 18px;
+    border: 1px solid #28546d;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(9, 52, 78, .92), rgba(5, 24, 38, .92));
+}
+
+.fine-summary small { color: #76b8d6; font-size: 10px; letter-spacing: 1px; }
+.fine-summary strong { display: block; margin-top: 6px; font-size: 26px; }
+.fine-summary span { max-width: 420px; color: #9bbccc; font-size: 12px; line-height: 1.5; }
+.fine-list { display: grid; gap: 10px; padding-bottom: 20px; }
+.fine-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px; padding: 15px 17px; border: 1px solid #28546d; border-radius: 9px; background: rgba(7, 28, 43, .9); }
+.fine-row h3 { margin: 0 0 6px; font-size: 15px; }
+.fine-row p { margin: 0 0 6px; color: #b6d2df; font-size: 12px; }
+.fine-row small { color: #719bb0; font-size: 10px; }
+.fine-payment { display: grid; justify-items: end; gap: 8px; }
+.fine-payment b { color: #ff9aaa; font-size: 17px; }
+.fine-payment button { min-width: 110px; padding: 10px 14px; border: 1px solid #3d8bb3; border-radius: 7px; background: #145b80; color: #fff; font-weight: 800; cursor: pointer; }
+.fine-payment button:hover { border-color: #65d0ff; background: #19749e; }
+.fine-payment button:disabled { opacity: .38; cursor: not-allowed; }
+#fineMessage { min-height: 18px; color: #9fc7d9; font-size: 12px; }
+
+.pin-modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgba(0, 7, 13, .78); backdrop-filter: blur(4px); }
+.pin-dialog { width: min(390px, 92vw); padding: 25px; border: 1px solid #3686ad; border-radius: 15px; background: linear-gradient(145deg, #0b293d, #06141f); box-shadow: 0 24px 80px #000c; }
+.pin-dialog small { color: #65cfff; font-size: 9px; font-weight: 900; letter-spacing: 1.5px; }
+.pin-dialog h2 { margin: 8px 0 4px; }
+.pin-dialog>p { margin: 0 0 15px; color: #a9c8d7; font-size: 13px; }
+.pin-dialog input { width: 100%; padding: 14px; border: 1px solid #3c7692; border-radius: 8px; outline: none; background: #03111b; color: #fff; font-size: 20px; letter-spacing: 8px; text-align: center; }
+.pin-dialog input:focus { border-color: #61d0ff; box-shadow: 0 0 0 3px rgba(52, 172, 224, .16); }
+.pin-dialog #pinError { min-height: 17px; margin: 10px 0; color: #ff9aaa; text-align: center; }
+.pin-dialog>div { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.pin-dialog button { padding: 11px; border: 1px solid #356d89; border-radius: 7px; background: #102f43; color: #dceef7; font-weight: 800; cursor: pointer; }
+.pin-dialog button.confirm { border-color: #36a6da; background: #1477a2; color: #fff; }
+.pin-dialog button:disabled { opacity: .5; cursor: wait; }
+
+@media(max-width: 760px) {
+    .fine-summary, .fine-row { grid-template-columns: 1fr; display: grid; }
+    .fine-payment { justify-items: start; }
+}

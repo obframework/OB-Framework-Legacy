@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>Inventario OB</title>
+</head>
+<body>
+  <aside id="item-changes" aria-live="polite" aria-label="Movimentacoes de itens"></aside>
+  <main id="inventory" class="hidden">
+    <section class="inventory-panel">
+      <header>
+        <div>
+          <p>OB FRAMEWORK</p>
+          <h1>Inventario</h1>
+        </div>
+        <button id="close" class="close" aria-label="Fechar">×</button>
+      </header>
+      <div class="content">
+        <section class="side" aria-label="Mochila">
+          <div class="side-title"><div><small>MOCHILA</small><strong>Seus itens</strong></div><span id="own-weight">0.0 / 25.0 kg</span></div>
+          <div class="weight-bar"><i id="own-progress"></i></div>
+          <div id="own-slots" class="slots"></div>
+        </section>
+        <section class="actions" aria-label="Acoes do item">
+          <div id="selected-icon" class="selected-icon">?</div>
+          <strong id="selected-name">Selecione um item</strong>
+          <label>Quantidade<input id="amount" type="number" min="1" value="1"></label>
+          <button id="use" class="secondary">Usar</button>
+          <button id="send" class="primary">Enviar ao proximo</button>
+        </section>
+        <section class="side" aria-label="Chao ou loja">
+          <div class="side-title"><div><small id="right-title">CHÃO</small><strong id="right-name">Nenhum item</strong></div><span id="right-weight">0 itens</span></div>
+          <div class="weight-bar"><i id="right-progress"></i></div>
+          <div id="right-slots" class="slots"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <main id="commerce" class="hidden">
+    <section class="commerce-panel">
+      <header><div><p>OB COMERCIO</p><h1>Gestao de lojas</h1></div><button id="commerce-close" class="close" aria-label="Fechar">×</button></header>
+      <div id="commerce-feedback"></div>
+      <div id="commerce-body"></div>
+    </section>
+  </main>
+  <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

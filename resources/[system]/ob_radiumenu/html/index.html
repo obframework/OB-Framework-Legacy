@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>OB Menu R&aacute;pido</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <section id="radial" class="radial" aria-label="Menu r&aacute;pido">
+      <div class="wheel" aria-hidden="true"></div>
+
+      <button class="action put" data-action="put" type="button">
+        <span class="action-content">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 15.5v-4l2-5h12l2 5v4"></path>
+            <path d="M3 13h18v5H3z"></path>
+            <circle cx="6.5" cy="18" r="1.5"></circle>
+            <circle cx="17.5" cy="18" r="1.5"></circle>
+            <path class="accent" d="M12 2v7m-3-3 3 3 3-3"></path>
+          </svg>
+          <strong>Colocar no ve&iacute;culo</strong>
+          <small>Pessoa pr&oacute;xima</small>
+        </span>
+      </button>
+
+      <button class="action remove" data-action="remove" type="button">
+        <span class="action-content">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 15.5v-4l2-5h12l2 5v4"></path>
+            <path d="M3 13h18v5H3z"></path>
+            <circle cx="6.5" cy="18" r="1.5"></circle>
+            <circle cx="17.5" cy="18" r="1.5"></circle>
+            <path class="accent" d="M12 10V3m-3 3 3-3 3 3"></path>
+          </svg>
+          <strong>Retirar do ve&iacute;culo</strong>
+          <small>Pessoa pr&oacute;xima</small>
+        </span>
+      </button>
+
+      <button class="action outfits" data-action="outfits" type="button">
+        <span class="action-content">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 5 5 7 2.8 11l3.2 2v7h12v-7l3.2-2L19 7l-4-2c-.5 1.5-1.5 2.3-3 2.3S9.5 6.5 9 5Z"></path>
+            <path class="accent" d="M9 5c.6 1.5 1.6 2.3 3 2.3S14.4 6.5 15 5"></path>
+          </svg>
+          <strong>Roupas salvas</strong>
+          <small>Atalhos de visual</small>
+        </span>
+      </button>
+
+      <span class="divider divider-left" aria-hidden="true"></span>
+      <span class="divider divider-right" aria-hidden="true"></span>
+      <span class="divider divider-bottom" aria-hidden="true"></span>
+
+      <button id="close" class="close" type="button" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"></path></svg>
+        <small>F1</small>
+      </button>
+    </section>
+
+    <section id="outfit-panel" class="panel hidden">
+      <header>
+        <button class="back" data-back type="button" aria-label="Voltar">&lsaquo;</button>
+        <div><small>MENU R&Aacute;PIDO</small><h1>Roupas salvas</h1></div>
+        <button class="x" data-close type="button" aria-label="Fechar">&times;</button>
+      </header>
+      <p class="hint">Salve at&eacute; cinco combina&ccedil;&otilde;es para vestir rapidamente.</p>
+      <form id="save-form" class="save-form">
+        <select id="slot">
+          <option value="1">Espa&ccedil;o 1</option><option value="2">Espa&ccedil;o 2</option>
+          <option value="3">Espa&ccedil;o 3</option><option value="4">Espa&ccedil;o 4</option>
+          <option value="5">Espa&ccedil;o 5</option>
+        </select>
+        <input id="label" maxlength="32" placeholder="Nome da roupa">
+        <button type="submit">Salvar roupa atual</button>
+      </form>
+      <div id="outfit-list" class="outfit-list"></div>
+    </section>
+
+    <p class="footer">Use o mouse para selecionar &middot; F1 para fechar</p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

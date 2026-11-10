@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="styles.css"><title>OB Portas</title></head>
+<body>
+<main id="app" class="hidden">
+  <section class="window">
+    <header><div><small>OB ADMINISTRAÇÃO</small><h1>Portas e trancas</h1><p>Grupos reutilizáveis, permissões e portas persistentes</p></div><button id="close" class="icon" type="button">×</button></header>
+    <nav><button data-tab="doors" class="active">Portas</button><button data-tab="groups">Grupos e permissões</button></nav>
+    <div id="feedback" class="feedback hidden"></div>
+    <div class="workspace">
+      <aside><div class="list-head"><input id="search" placeholder="Pesquisar"><button id="new" type="button">＋</button></div><div id="records" class="records"></div></aside>
+      <form id="form" novalidate>
+        <section id="door-fields">
+          <div class="grid"><label>Nome da porta<input id="door-label" maxlength="80" required></label><label>Grupo<select id="door-group" required></select></label></div>
+          <div class="grid"><label>Tipo<select id="door-type"><option value="single">Porta simples</option><option value="double">Porta dupla</option></select></label><label class="check"><input id="door-locked" type="checkbox" checked> Começar/ficar trancada</label><label class="check"><input id="door-enabled" type="checkbox" checked> Porta ativa</label></div>
+          <div class="leaves"><article><div><b>Folha 1</b><span id="leaf-1">Não capturada</span></div><button type="button" data-capture="1">Capturar olhando</button></article><article id="leaf-two"><div><b>Folha 2</b><span id="leaf-2">Não capturada</span></div><button type="button" data-capture="2">Capturar olhando</button></article></div>
+          <p class="hint">Feche a porta, mire no local onde o cadeado deve aparecer e capture a folha. Essa posição fechada será usada ao trancar. Em portas duplas, capture as duas folhas fechadas.</p>
+        </section>
+        <section id="group-fields" class="hidden">
+          <div class="grid"><label>Nome do grupo<input id="group-label" maxlength="80" required></label><label>Distância de interação<input id="group-distance" type="number" min="1" max="8" step="0.1"></label></div>
+          <label>Permissões do ob_org<textarea id="group-permissions" rows="3" placeholder="police, mechanic, hospital.access"></textarea><span>Separe por vírgula. Basta possuir uma das permissões.</span></label>
+          <div class="grid"><label>Trancar automaticamente após (segundos)<input id="group-autolock" type="number" min="0" max="86400"></label><label class="check"><input id="group-duty" type="checkbox"> Exigir estar em serviço</label><label class="check"><input id="group-public" type="checkbox"> Acesso público</label><label class="check"><input id="group-default" type="checkbox" checked> Novas portas trancadas</label><label class="check"><input id="group-enabled" type="checkbox" checked> Grupo ativo</label></div>
+        </section>
+        <div class="actions"><button id="delete" class="danger" type="button">Excluir</button><span></span><button id="refresh" class="secondary" type="button">Atualizar</button><button type="submit">Salvar</button></div>
+      </form>
+    </div>
+  </section>
+</main>
+<div id="capture" class="capture hidden"><b>CAPTURA DE PORTA</b><span>Deixe a folha fechada, olhe para ela e pressione E · Backspace cancela</span></div>
+<script src="app.js"></script>
+</body></html>

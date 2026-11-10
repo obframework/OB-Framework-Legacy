@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Central de Empregos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main id="app" class="hidden" aria-hidden="true">
+        <section class="panel" role="dialog" aria-modal="true" aria-labelledby="title">
+            <header>
+                <div>
+                    <span class="eyebrow">PREFEITURA DE LOS SANTOS</span>
+                    <h1 id="title">Central de Empregos</h1>
+                    <p>Escolha uma carreira legal vinculada às organizações da cidade.</p>
+                </div>
+                <button id="close" class="icon-button" aria-label="Fechar">ESC</button>
+            </header>
+
+            <section id="status" class="status-card"></section>
+            <section id="jobs" class="jobs"></section>
+
+            <footer>
+                <span>Seu ingresso começa sempre no cargo inicial.</span>
+                <span>Leia as regras antes de confirmar.</span>
+            </footer>
+        </section>
+
+        <section id="confirm" class="confirm hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+            <div class="confirm-card">
+                <span class="eyebrow">CONFIRMAÇÃO OBRIGATÓRIA</span>
+                <h2 id="confirm-title">Regras do vínculo</h2>
+                <p id="confirm-copy"></p>
+                <ol id="rules"></ol>
+                <label class="agreement">
+                    <input id="agree" type="checkbox">
+                    <span>Li, entendi e concordo com as regras acima.</span>
+                </label>
+                <div class="confirm-actions">
+                    <button id="cancel-confirm" class="button secondary">Voltar</button>
+                    <button id="accept-confirm" class="button primary" disabled>Confirmar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

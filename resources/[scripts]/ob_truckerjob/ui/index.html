@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+  <title>Central de Transportes</title>
+</head>
+<body>
+  <section id="jobHud" class="job-hud hidden">
+    <span class="hud-kicker">TRANSPORTADORA</span>
+    <strong id="hudCargo">Carga</strong>
+    <p id="hudInstruction">Aguardando serviço.</p>
+    <div class="hud-grid"><span>Destino <b id="hudDestination">-</b></span><span>Distância <b id="hudDistance">0 km</b></span></div>
+    <div id="integrityWrap" class="integrity"><span>Integridade da carga <b id="hudIntegrity">100%</b></span><div class="bar"><i id="integrityBar"></i></div></div>
+  </section>
+
+  <main id="app" class="hidden">
+    <aside>
+      <div class="brand"><span aria-hidden="true">🚛</span><div><b>Transportes</b><small>LOGÍSTICA E CARGAS</small></div></div>
+      <button class="nav active" data-tab="overview"><span class="nav-icon">⌂</span><span>Visão geral</span></button>
+      <button class="nav" data-tab="offers"><span class="nav-icon">📦</span><span>Entregas</span></button>
+      <button class="nav" data-tab="skills"><span class="nav-icon">↗</span><span>Habilidades</span><em id="pointCount">0</em></button>
+      <button class="nav" data-tab="group"><span class="nav-icon">👥</span><span>Grupo</span><em id="groupCount">1/4</em></button>
+      <button class="nav" data-tab="ranking"><span class="nav-icon">🏆</span><span>Ranking</span></button>
+      <button class="nav" data-tab="tutorial"><span class="nav-icon">▶</span><span>Tutorial</span></button>
+    </aside>
+
+    <section class="content">
+      <header><div><span class="eyebrow">CENTRAL DE TRANSPORTES</span><h1 id="pageTitle">Visão geral</h1></div><button id="close" class="close">Fechar <b>ESC</b></button></header>
+
+      <section id="overview" class="tab active">
+        <div class="grid two">
+          <article class="card level-card"><span>Nível profissional</span><strong id="level">1</strong><small id="xpText">0 / 900 XP</small><div class="bar"><i id="xpBar"></i></div></article>
+          <article class="card status-card"><span>Status atual</span><strong id="assignmentStatus">Sem entrega</strong><small id="assignmentInfo">Escolha uma das ofertas disponíveis.</small><button id="cancelAssignment" class="danger hidden">Cancelar entrega</button></article>
+        </div>
+        <div class="grid four">
+          <article class="card stat"><span>Entregas</span><strong id="deliveries">0</strong></article>
+          <article class="card stat"><span>Ganhos</span><strong id="earned" data-ob-money="0">$0</strong></article>
+          <article class="card stat"><span>Alcance do grupo</span><strong id="maxDistance">2 km</strong></article>
+          <article class="card stat"><span>Licença do líder</span><strong id="cargoLicense">0</strong></article>
+        </div>
+        <article class="card hint"><b>Como funciona</b><p>O líder escolhe uma oferta. Cada integrante retira seu próprio caminhão e sua carreta, mas todos recebem o mesmo modelo, carga e destino. Entregue a carreta desacoplada e devolva o caminhão para receber. O dano da carga altera apenas o bônus individual.</p></article>
+      </section>
+
+      <section id="offers" class="tab">
+        <div class="section-head"><div><h2>Mercado de fretes</h2><p>As ofertas são compartilhadas e atualizadas automaticamente.</p></div><div class="refresh-box"><span>Próxima atualização</span><b id="refreshTimer">02:00</b></div></div>
+        <section id="offerList" class="offer-list"></section>
+      </section>
+
+      <section id="skills" class="tab">
+        <div class="section-head"><div><h2>Especialização</h2><p>Um ponto é liberado a cada nível depois do primeiro.</p></div><div class="points"><span>Pontos disponíveis</span><strong id="availablePoints">0</strong></div></div>
+        <section id="skillList" class="skill-list"></section>
+      </section>
+
+      <section id="group" class="tab">
+        <div class="section-head"><div><h2>Equipe de transporte</h2><p id="groupDescription">Convide até três pessoas próximas.</p></div><button id="leaveGroup" class="outline">Sair do grupo</button></div>
+        <h3>Integrantes</h3><section id="members" class="people"></section>
+        <h3>Pessoas próximas</h3><section id="nearby" class="people"></section>
+      </section>
+
+      <section id="ranking" class="tab">
+        <div class="ranking-layout">
+          <article class="card ranking-card"><div class="section-head"><h2>Ranking geral</h2><div><button id="rankDeliveries" class="mini">Entregas</button><button id="rankXp" class="mini active-mini">XP</button></div></div><div class="ranking-table"><div class="ranking-row table-head"><b>Posição</b><b>Caminhoneiro</b><b id="rankValueTitle">XP</b></div><section id="leaderboard"></section></div></article>
+          <article class="card rank-side"><span>Sua colocação</span><strong id="myRank">#-</strong><b id="myRankValue">0 XP</b></article>
+        </div>
+      </section>
+
+      <section id="tutorial" class="tab"><article class="card tutorial"><b>GUIA EM VÍDEO</b><h2 id="tutorialTitle">Tutorial</h2><p id="tutorialEmpty">O tutorial ainda não foi configurado.</p><iframe id="tutorialVideo" title="Tutorial do trabalho" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></article></section>
+    </section>
+  </main>
+  <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

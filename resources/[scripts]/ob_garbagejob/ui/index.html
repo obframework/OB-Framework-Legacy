@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="app.css?v=20260812-1">
+  <title>Lixeiro</title>
+</head>
+<body>
+  <section id="routeHud" class="route-hud hidden">
+    <span class="hud-kicker">COLETA EM ANDAMENTO</span>
+    <strong id="hudStatus">Parada 0/0</strong>
+    <div class="hud-row"><span>Sacos nesta parada</span><b id="hudStopBags">0</b></div>
+    <div class="hud-row"><span>Total restante</span><b id="hudTotalBags">0</b></div>
+  </section>
+  <main id="app" class="hidden">
+    <aside>
+      <div class="brand"><span>♻</span><b>Coleta</b></div>
+      <button class="nav active" data-tab="overview"><span class="nav-icon">⌂</span><span>Visão geral</span></button>
+      <button class="nav" data-tab="progress"><span class="nav-icon">↗</span><span>Progresso</span></button>
+      <button class="nav" data-tab="group"><span class="nav-icon">👥</span><span>Grupo</span><em id="groupCount">1/4</em></button>
+      <button class="nav" data-tab="ranking"><span class="nav-icon">🏆</span><span>Ranking</span></button>
+      <button class="nav" data-tab="tutorial"><span class="nav-icon">▶</span><span>Tutorial</span></button>
+    </aside>
+    <section class="content">
+      <header><h1 id="title">Visão geral</h1><button id="close" class="close">Fechar <b>ESC</b></button></header>
+
+      <div id="overview" class="tab active">
+        <div class="grid two">
+          <article class="card level"><span>Nível atual</span><strong id="level">1</strong><small id="xpText">0 / 800 XP</small><div class="bar"><i id="xpBar"></i></div></article>
+          <article class="card"><span>Status da rota</span><strong id="routeStatus">Fora de turno</strong><small id="routeInfo">Escolha uma rota na central</small><small id="teamInfo">Equipe: 1/4</small><button id="startRoute" class="primary">Iniciar rota</button><button id="cancelRoute" class="danger hidden">Cancelar rota</button></article>
+        </div>
+        <div class="grid three">
+          <article class="card"><span>Rotas concluídas</span><strong id="routesCompleted">0</strong></article>
+          <article class="card"><span>Ganhos totais</span><strong id="earned" data-ob-money="0">$0</strong></article>
+          <article class="card"><span>Bônus de nível</span><strong id="bonus">+0%</strong></article>
+        </div>
+        <article class="card hint"><b>Como funciona</b><p>Chame até três pessoas próximas. Cada integrante a mais aumenta os sacos em todas as paradas. Todos podem recolher e levar os sacos ao mesmo caminhão.</p></article>
+      </div>
+
+      <div id="progress" class="tab">
+        <article class="card progress-overview"><div class="progress-head"><h2>Progresso do nível atual</h2><strong id="progressLevel">Nível: 1</strong></div><div class="bar large"><i id="progressBar"></i></div><p id="progressDetails">0%</p></article>
+        <article class="card level-preview"><div class="preview-head"><h2 id="previewTitle">Nível: 1</h2><div><button id="previewPrev" class="mini">←</button><button id="previewNext" class="mini">→</button></div></div><div class="grid two preview-grid"><article class="preview-stat"><span>XP necessário</span><strong id="previewXp">0 XP</strong></article><article class="preview-stat"><span>Bônus de pagamento</span><strong id="previewMoney">0%</strong></article></div><article class="preview-unlock"><h3>Benefícios do nível</h3><p id="previewBenefit">Pagamento base da coleta.</p></article></article>
+      </div>
+
+      <div id="group" class="tab">
+        <div class="group-header"><div><h2>Equipe de coleta</h2><p id="groupDescription">Convide trabalhadores que estejam próximos.</p></div><button id="leaveGroup" class="outline">Sair do grupo</button></div>
+        <section id="members" class="members"></section>
+        <h3>Pessoas próximas</h3>
+        <section id="nearby" class="nearby"></section>
+      </div>
+
+      <div id="ranking" class="tab">
+        <div class="ranking-layout"><article class="card ranking-card"><div class="ranking-head"><h2>Ranking</h2><div><button id="rankRoutes" class="mini">Rotas</button><button id="rankXp" class="mini active-mini">Mais XP</button></div></div><div class="ranking-table"><div class="ranking-row table-head"><b>Posição</b><b>Jogador</b><b id="rankingValueHead">XP</b></div><section id="leaderboard"></section></div></article><article class="card rank-side"><h2 id="rankSideTitle">Mais experiência</h2><p>Sua colocação</p><div class="rank-orb"><span>POSIÇÃO</span><strong id="myRank">#-</strong></div><b id="myRankValue">0 XP</b></article></div>
+      </div>
+      <div id="tutorial" class="tab"><article class="card"><b>GUIA EM VIDEO</b><h2 id="tutorialTitle">Tutorial</h2><p id="tutorialEmpty">O tutorial ainda nao foi configurado.</p><iframe id="tutorialVideo" title="Tutorial do trabalho" style="display:none;width:100%;height:440px;border:0;border-radius:12px;background:#07101f" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></article></div>
+    </section>
+  </main>
+  <script src="https://cfx-nui-ob_lib/web/currency.js"></script>
+<script src="app.js?v=20260929-cancel"></script>
+</body>
+</html>

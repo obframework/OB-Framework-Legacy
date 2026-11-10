@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="styles.css"><title>Registradoras OB</title></head>
+<body><main id="app" hidden>
+<header><div><small>OB FRAMEWORK · EDITOR DO MUNDO</small><h1>Registradoras</h1><p>Cadastre os pontos de roubo sem reiniciar a cidade.</p></div><button id="close" type="button">Fechar · ESC</button></header>
+<section class="body"><aside><input id="search" placeholder="Buscar local ou ID"><button id="new" type="button">+ Nova registradora</button><nav id="list"></nav></aside>
+<form id="form"><div class="grid">
+<label>ID unico<input name="id" required maxlength="48" pattern="[A-Za-z0-9_-]+"></label>
+<label>Nome<input name="label" required maxlength="80"></label>
+<label>X<input name="x" type="number" step="any" required></label><label>Y<input name="y" type="number" step="any" required></label>
+<label>Z / altura do objeto<input name="z" type="number" step="any" required></label><label>Direcao<input name="w" type="number" step="any" min="0" max="360" required></label>
+<label>Premio minimo<input name="minimum" type="number" min="1" max="50000" required></label><label>Premio maximo<input name="maximum" type="number" min="1" max="50000" required></label>
+<label>Policiais em servico<input name="police" type="number" min="0" max="128" required></label><label>Duracao (segundos)<input name="seconds" type="number" min="3" max="600" required></label>
+<label>Cooldown (segundos)<input name="cooldown" type="number" min="30" max="604800" required></label>
+<label class="check"><input name="spawnProp" type="checkbox"> Criar objeto de registradora</label>
+</div><p class="hint">Capturar usa a registradora existente a ate 3 m ou sua posicao atual. Ajuste Z para colocar sobre um balcao. O item necessario e definido no config.lua.</p>
+<div class="buttons"><button type="button" id="capture">Capturar local</button><button type="button" id="teleport">Teleportar</button><button type="submit">Salvar</button><button type="button" id="delete" class="danger">Excluir</button></div>
+<p id="status" role="status"></p></form></section>
+<footer>Permissoes e recompensas validadas no servidor · Cadastros persistentes</footer>
+</main><script src="app.js"></script></body></html>

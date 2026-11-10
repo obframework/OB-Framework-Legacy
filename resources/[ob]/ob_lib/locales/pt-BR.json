@@ -1,0 +1,10 @@
+{
+  "common": {
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "processing": "Processando...",
+    "timeout": "A operacao demorou demais.",
+    "too_many_requests": "Muitas solicitacoes. Aguarde {milliseconds} ms."
+  }
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>OB Framework</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="loading-screen" aria-label="Carregando OB Framework">
+        <video
+            id="background-video"
+            class="background-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            poster="assets/poster.jpg"
+            aria-hidden="true"
+        >
+            <source src="assets/ob-loading-60s.webm" type="video/webm">
+        </video>
+
+        <audio id="background-music" autoplay loop preload="auto">
+            <source src="assets/bonde-da-ob.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="video-fallback" aria-hidden="true"></div>
+        <div class="bottom-shade" aria-hidden="true"></div>
+
+        <div class="audio-hint" aria-live="polite">
+            <kbd>M</kbd>
+            <span id="audio-label">Silenciar musica</span>
+        </div>
+
+        <section class="loading-status" aria-live="polite">
+            <div class="status-copy">
+                <span id="status-text">Conectando ao servidor</span>
+                <strong id="progress-label">0%</strong>
+            </div>
+            <div
+                id="progress-track"
+                class="progress-track"
+                role="progressbar"
+                aria-label="Progresso do carregamento"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+            >
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <p class="loading-hint">Preparando sua historia em Los Santos</p>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

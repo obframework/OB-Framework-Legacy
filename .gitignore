@@ -1,0 +1,26 @@
+# O pacote publico contem apenas placeholders nos arquivos cfg.
+# Nunca substitua os placeholders por segredos dentro de um clone versionado.
+server.cfg.bkp
+*.key
+*.pem
+.env
+.env.*
+server.private.cfg
+
+cache/
+crashes/
+logs/
+local-database/
+db/
+backups/
+archive/
+.console-history
+.replxx_history
+.id
+
+**/node_modules/
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+    <title>Emergência</title>
+</head>
+<body>
+    <main>
+        <header><span>ATENDIMENTO PÚBLICO</span><h1>Emergência</h1><p>Escolha o serviço e descreva brevemente o que aconteceu.</p></header>
+        <section class="services">
+            <button class="service police" data-service="police" type="button"><b>190</b><span><strong>Polícia</strong><small>Risco, crime ou ameaça</small></span></button>
+            <button class="service medical" data-service="ambulance" type="button"><b>192</b><span><strong>Médico</strong><small>Acidente ou emergência médica</small></span></button>
+        </section>
+        <label for="message">Descrição do chamado</label>
+        <textarea id="message" maxlength="140" placeholder="Ex.: pessoa ferida em frente ao estabelecimento"></textarea>
+        <div class="location"><i></i><span>Sua localização atual será enviada automaticamente.</span></div>
+        <button id="send" type="button" disabled>Enviar chamado</button>
+        <output id="status"></output>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
