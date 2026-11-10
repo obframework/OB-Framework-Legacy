@@ -32,7 +32,8 @@ empregos, clima, evidencias e atividades legais e ilegais.
 1. Clone este repositorio na pasta desejada do servidor.
 2. Copie `server.private.cfg.example` para `server.private.cfg` e substitua os indicadores.
 3. Configure `SEU_IDENTIFICADOR` e os demais indicadores do `server.cfg`.
-4. Baixe e publique o repositorio de imagens no caminho `/orbis/`.
+4. Baixe e publique o repositorio de imagens em qualquer pasta ou dominio
+   acessivel por HTTP/HTTPS.
 5. Inicie pelo `server.cfg` e acompanhe o console na primeira inicializacao.
 
 ## Imagens obrigatorias
@@ -41,7 +42,9 @@ As imagens utilizadas pelas interfaces ficam em um repositorio separado:
 
 **[OB-Framework-Imagens](https://github.com/obframework/OB-Framework-Imagens)**
 
-Publique o conteudo sob `/orbis/`. Sem esses arquivos, imagens de itens,
+O nome da pasta base e livre. Preserve dentro dela as subpastas `icons/`,
+`cars/`, `creator/`, `barbershop/`, `skinshop/` e `tattoos/`, e ajuste as URLs
+base nas configuracoes dos recursos. Sem esses arquivos, imagens de itens,
 veiculos, roupas e outras interfaces podem nao aparecer.
 
 ## Versao Enhanced
