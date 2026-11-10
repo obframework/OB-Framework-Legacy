@@ -39,7 +39,7 @@ empregos, clima, evidencias e atividades legais e ilegais.
 
 As imagens utilizadas pelas interfaces ficam em um repositorio separado:
 
-**[OB-Framework-Imagens](../OB-Framework-Imagens)**
+**[OB-Framework-Imagens](https://github.com/obframework/OB-Framework-Imagens)**
 
 Publique o conteudo sob `/orbis/`. Sem esses arquivos, imagens de itens,
 veiculos, roupas e outras interfaces podem nao aparecer.
@@ -47,7 +47,7 @@ veiculos, roupas e outras interfaces podem nao aparecer.
 ## Versao Enhanced
 
 A versao principal para GTA V Enhanced fica no repositorio
-**[OB-Framework](../OB-Framework)**.
+**[OB-Framework](https://github.com/obframework/OB-Framework)**.
 
 ## Seguranca
 
