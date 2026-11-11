@@ -32,9 +32,12 @@ empregos, clima, evidencias e atividades legais e ilegais.
 1. Clone este repositorio na pasta desejada do servidor.
 2. Copie `server.private.cfg.example` para `server.private.cfg` e substitua os indicadores.
 3. Configure `SEU_IDENTIFICADOR` e os demais indicadores do `server.cfg`.
-4. Baixe e publique o repositorio de imagens em qualquer pasta ou dominio
+4. Importe `database/ob.sql` em um banco vazio. O arquivo inclui o esquema e
+   configuracoes iniciais reutilizaveis, sem contas, personagens, membros de
+   organizacoes, inventarios, logs ou identificadores de jogadores.
+5. Baixe e publique o repositorio de imagens em qualquer pasta ou dominio
    acessivel por HTTP/HTTPS.
-5. Inicie pelo `server.cfg` e acompanhe o console na primeira inicializacao.
+6. Inicie pelo `server.cfg` e acompanhe o console na primeira inicializacao.
 
 ## Imagens obrigatorias
 
@@ -46,6 +49,14 @@ O nome da pasta base e livre. Preserve dentro dela as subpastas `icons/`,
 `cars/`, `creator/`, `barbershop/`, `skinshop/` e `tattoos/`, e ajuste as URLs
 base nas configuracoes dos recursos. Sem esses arquivos, imagens de itens,
 veiculos, roupas e outras interfaces podem nao aparecer.
+
+## Banco de dados inicial
+
+O arquivo `database/ob.sql` e uma copia publica higienizada do banco usado no
+desenvolvimento. Importe-o somente em um banco vazio e confira o nome do banco
+no inicio do arquivo antes de executar. Cadastros individuais de jogadores e
+dados operacionais foram removidos; ficaram apenas a estrutura e configuracoes
+reutilizaveis.
 
 ## Versao Enhanced
 
